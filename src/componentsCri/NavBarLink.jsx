@@ -167,6 +167,7 @@ function NavBarLink() {
             <NavDropdown
               id="second-dropdown"
               className=" d-none d-lg-block text-center"
+              align="end"
               title={
                 <div className="d-flex flex-column align-items-center">
                   <TfiLayoutGrid3Alt className="fs-4" />
@@ -174,7 +175,7 @@ function NavBarLink() {
                 </div>
               }
             >
-              <Container>
+              <Container style={{ width: "400px", translateX: 100 }}>
                 <Row className=" d-flex">
                   <Col className=" col-6">
                     <h4>Le mie app</h4>
