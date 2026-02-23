@@ -1,0 +1,45 @@
+.experience-section {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.dashed-container {
+  border: 1px dashed #BDCDDB;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+}
+
+.responsive-text {
+  font-size: 0.9rem;
+}
+
+.title-text {
+  font-size: 1rem;
+}
+
+.subtitle-text {
+  font-size: 0.875rem;
+}
+
+.date-text {
+  font-size: 0.8rem;
+}
+
+.job-placeholder {
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+/* Media Query per Mobile */
+@media (max-width: 576px) {
+  .dashed-container {
+    padding: 15px !important;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

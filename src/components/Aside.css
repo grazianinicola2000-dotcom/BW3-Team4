@@ -2,9 +2,8 @@
   width: 300px;
 }
 
-/* Blocca le dimensioni delle icone per renderle identiche */
 .pencil-icon {
-  font-size: 1.25rem !important; /* Circa 20px */
+  font-size: 1.25rem !important;
   color: #666;
   cursor: pointer;
 }
