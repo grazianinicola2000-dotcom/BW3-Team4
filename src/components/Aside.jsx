@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsPencil, BsFillPersonPlusFill } from 'react-icons/bs';
-import { IoEyeSharp } from 'react-icons/io5'; // Icona occhio per "Solo per te"
+import { IoEyeSharp } from 'react-icons/io5'; 
 import './Aside.css';
 
 const Aside = () => {
@@ -37,7 +37,7 @@ const Aside = () => {
         </div>
       </div>
 
-      {/* 2. CARD ALTRI PROFILI CONSULTATI (Aggiornata con Icona Occhio) */}
+      {/* 2. CARD ALTRI PROFILI CONSULTATI */}
       <div className="card shadow-none border-1 mb-2" style={{ borderRadius: '10px' }}>
         <div className="card-body p-3">
           <div className="mb-3">
