@@ -26,7 +26,7 @@ const profileReducer = (currentState = initialState, action) => {
         error: true,
       };
     default:
-      return profileReducer;
+      return currentState;
   }
 };
 

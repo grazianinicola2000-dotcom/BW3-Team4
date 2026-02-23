@@ -1,6 +1,16 @@
 export const GET_PROFILE = "GET_PROFILE";
 export const GET_PROFILE_ERROR = "GET_PROFILE_ERROR";
 export const GET_PROFILE_LOADING = "GET_PROFILE_LOADING";
+export const OPEN_PROFILE_EDIT_FORM = "OPEN_PROFILE_EDIT_FORM";
+export const CLOSE_PROFILE_EDIT_FORM = "CLOSE_PROFILE_EDIT_FORM";
+
+export const openProfileEditForm = () => ({
+  type: OPEN_PROFILE_EDIT_FORM,
+});
+
+export const closeProfileEditForm = () => ({
+  type: CLOSE_PROFILE_EDIT_FORM,
+});
 
 export const getProfile = function () {
   return async (dispatch) => {

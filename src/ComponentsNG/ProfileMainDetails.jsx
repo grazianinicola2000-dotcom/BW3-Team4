@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getProfile from "../redux/actions";
-import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import "./ProfileMainDetails.css";
+import { openProfileEditForm } from "../redux/actions";
 
 const ProfileMainDetails = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,13 @@ const ProfileMainDetails = () => {
             Enhance profile
           </Button>
         </div>
-        <div id="editBtnContainer" className="m-0 rounded-circle">
+        <div
+          onClick={() => {
+            (console.log("click"), dispatch(openProfileEditForm()));
+          }}
+          id="editBtnContainer"
+          className="m-0 rounded-circle"
+        >
           <i id="editBtn" className="bi bi-pencil"></i>
         </div>
       </section>

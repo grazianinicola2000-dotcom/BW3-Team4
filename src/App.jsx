@@ -1,10 +1,12 @@
 import "./App.css";
-import Aside from "./components/Aside";
+import ProfileEditForm from "./ComponentsNG/ProfileEditForm";
+import ProfileMainDetails from "./ComponentsNG/ProfileMainDetails";
 
 function App() {
   return (
     <>
-      <Aside />
+      <ProfileMainDetails />
+      <ProfileEditForm />
     </>
   );
 }
