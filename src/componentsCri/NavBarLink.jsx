@@ -15,8 +15,25 @@ import { MdGroups } from "react-icons/md"
 import { FaChalkboard } from "react-icons/fa"
 import { VscGraph } from "react-icons/vsc"
 import { FaInfoCircle } from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
+import getProfile from "../redux/actions"
+import { useEffect } from "react"
 
 function NavBarLink() {
+  const profileDetails = useSelector((currentState) => {
+    return currentState.profile.profileDetails
+  })
+
+  const loading = useSelector((currentState) => {
+    return currentState.profile.loading
+  })
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [])
+
   return (
     <Navbar expand="lg" className=" border-bottom p-0">
       <Container className="d-flex align-items-center gap-3">
@@ -69,6 +86,7 @@ function NavBarLink() {
             <NavDropdown
               id="user-dropdown"
               className=" d-none d-lg-block text-center"
+              align="end"
               title={
                 <div className=" d-flex flex-column align-items-center">
                   <FaUserCircle className="fs-4" />
@@ -78,12 +96,37 @@ function NavBarLink() {
             >
               <Container>
                 <Row>
-                  <Col className="col-3 fs-4 ">
-                    <FaUserCircle className="fs-4" />
+                  <Col className="col-3 pt-1">
+                    {!loading && profileDetails?.image && (
+                      <img
+                        src={profileDetails.image}
+                        alt="profile"
+                        style={{
+                          width: "25px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    )}
                   </Col>
                   <Col className=" col-9 fs-6 ps-0">
-                    <h5>Nome</h5>
-                    <span>descrizione</span>
+                    <h5
+                      className={`m-0 ${loading || !profileDetails ? "placeholder col-2" : ""}`}
+                    >
+                      {!loading && profileDetails && (
+                        <>
+                          {profileDetails.name} {profileDetails.surname}
+                        </>
+                      )}
+                    </h5>
+                    <span
+                      className={
+                        loading || !profileDetails
+                          ? "placeholder col-2 m-0"
+                          : "m-0"
+                      }
+                    >
+                      {!loading && profileDetails?.title}
+                    </span>
                   </Col>
                   <div className=" d-flex justify-content-center gap-1 my-3">
                     <Button className=" bg-light text-primary text-start rounded-5 fw-semibold">
@@ -175,7 +218,7 @@ function NavBarLink() {
                 </div>
               }
             >
-              <Container style={{ width: "400px", translateX: 100 }}>
+              <Container style={{ width: "400px" }}>
                 <Row className=" d-flex">
                   <Col className=" col-6">
                     <h4>Le mie app</h4>
