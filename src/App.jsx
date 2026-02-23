@@ -1,10 +1,10 @@
 import "./App.css";
-import ProfileMainDetails from "./ComponentsNG/ProfileMainDetails";
+import Aside from "./components/Aside";
 
 function App() {
   return (
     <>
-      <ProfileMainDetails />
+      <Aside />
     </>
   );
 }

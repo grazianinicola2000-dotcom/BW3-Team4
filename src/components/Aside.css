@@ -1,0 +1,23 @@
+.aside-container {
+  width: 300px;
+}
+
+/* Blocca le dimensioni delle icone per renderle identiche */
+.pencil-icon {
+  font-size: 1.25rem !important; /* Circa 20px */
+  color: #666;
+  cursor: pointer;
+}
+
+.pencil-icon:hover {
+  color: #000;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover-link:hover {
+  text-decoration: underline;
+  color: #0a66c2;
+}
