@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
-import { FaLinkedin, FaUserCircle } from "react-icons/fa"
+import { FaLinkedin } from "react-icons/fa"
 import { IoSearch, IoHomeSharp, IoBriefcase } from "react-icons/io5"
 import { BsFillPeopleFill } from "react-icons/bs"
 import { HiChatAlt } from "react-icons/hi"
@@ -35,12 +35,25 @@ function NavBarLink() {
   }, [])
 
   return (
-    <Navbar expand="lg" className=" border-bottom p-0">
-      <Container className="d-flex align-items-center gap-3">
+    <Navbar
+      expand="lg"
+      className=" bg-white border-bottom p-0 sticky-top top-0 z-3"
+    >
+      <Container className="d-flex align-items-center gap-5 justify-content-center gap-lg-3">
         <div className="d-flex align-items-center">
           <Navbar.Brand href="#home" className="p-0">
             <FaLinkedin className=" d-none d-lg-block text-primary display-5" />
-            <FaUserCircle className=" fs-1 d-lg-none" />
+            {!loading && profileDetails?.image && (
+              <img
+                src={profileDetails.image}
+                alt="profile"
+                className=" d-lg-none"
+                style={{
+                  width: "30px",
+                  borderRadius: "50%",
+                }}
+              />
+            )}
           </Navbar.Brand>
 
           <div className="d-flex align-items-center rounded-5 border border-secondary ps-3 pe-5 py-1">
@@ -65,22 +78,22 @@ function NavBarLink() {
 
             <Nav.Link className=" text-center nav-hover">
               <BsFillPeopleFill className="fs-4" />
-              <div className="small">My Network</div>
+              <div className="small">La mia rete</div>
             </Nav.Link>
 
             <Nav.Link className=" text-center nav-hover">
               <IoBriefcase className="fs-4" />
-              <div className="small">Jobs</div>
+              <div className="small">Lavoro</div>
             </Nav.Link>
 
             <Nav.Link className=" text-center nav-hover">
               <HiChatAlt className="fs-4" />
-              <div className="small">Messaging</div>
+              <div className="small">Messagistica</div>
             </Nav.Link>
 
             <Nav.Link className=" text-center nav-hover">
               <IoIosNotifications className="fs-4" />
-              <div className="small">Notifications</div>
+              <div className="small">Notifiche</div>
             </Nav.Link>
 
             <NavDropdown
@@ -89,8 +102,17 @@ function NavBarLink() {
               align="end"
               title={
                 <div className=" d-flex flex-column align-items-center">
-                  <FaUserCircle className="fs-4" />
-                  <span className="small">You</span>
+                  {!loading && profileDetails?.image && (
+                    <img
+                      src={profileDetails.image}
+                      alt="profile"
+                      style={{
+                        width: "25px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  )}
+                  <span className="small">Tu</span>
                 </div>
               }
             >
@@ -214,7 +236,7 @@ function NavBarLink() {
               title={
                 <div className="d-flex flex-column align-items-center">
                   <TfiLayoutGrid3Alt className="fs-4" />
-                  <span className="small">For Business</span>
+                  <span className="small">Per le aziende</span>
                 </div>
               }
             >
@@ -364,7 +386,7 @@ function NavBarLink() {
 
             <Nav.Link className=" text-center d-none d-xl-block nav-hover">
               <MdRequestPage className="fs-4 text-warning" />
-              <div className=" d-none d-xl-block small">Try Premium</div>
+              <div className=" d-none d-xl-block small">Prova premium</div>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
