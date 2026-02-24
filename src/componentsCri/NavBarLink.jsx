@@ -50,6 +50,7 @@ function NavBarLink() {
                 className=" d-lg-none"
                 style={{
                   width: "30px",
+                  height: "30px",
                   borderRadius: "50%",
                 }}
               />
@@ -98,39 +99,50 @@ function NavBarLink() {
 
             <NavDropdown
               id="user-dropdown"
-              className=" d-none d-lg-block text-center"
+              className="d-none d-lg-block text-center no-caret-dropdown"
               align="end"
               title={
-                <div className=" d-flex flex-column align-items-center">
+                <div className="d-flex flex-column align-items-center">
                   {!loading && profileDetails?.image && (
                     <img
                       src={profileDetails.image}
                       alt="profile"
                       style={{
-                        width: "25px",
+                        width: "24px",
+                        height: "24px",
                         borderRadius: "50%",
+                        objectFit: "cover",
                       }}
                     />
                   )}
-                  <span className="small">Tu</span>
+                  <div className="d-flex align-items-center">
+                    <span className="small">Tu</span>
+                    <span className="custom-caret ms-1"></span>
+                  </div>
                 </div>
               }
             >
-              <Container>
+              <Container
+                style={{
+                  width: "250px",
+                  paddingTop: "20px",
+                }}
+              >
                 <Row>
-                  <Col className="col-3 pt-1">
+                  <Col className="col-3 ps-3">
                     {!loading && profileDetails?.image && (
                       <img
                         src={profileDetails.image}
                         alt="profile"
                         style={{
-                          width: "25px",
+                          width: "40px",
+                          height: "40px",
                           borderRadius: "50%",
                         }}
                       />
                     )}
                   </Col>
-                  <Col className=" col-9 fs-6 ps-0">
+                  <Col className=" col-9 fs-6 ps-2">
                     <h5
                       className={`m-0 ${loading || !profileDetails ? "placeholder col-2" : ""}`}
                     >
@@ -230,74 +242,88 @@ function NavBarLink() {
             <div className="vr d-none d-lg-block"></div>
 
             <NavDropdown
-              id="second-dropdown"
-              className=" d-none d-lg-block text-center"
+              id="user-dropdown"
+              className="d-none d-lg-block text-center no-caret-dropdown"
               align="end"
               title={
                 <div className="d-flex flex-column align-items-center">
-                  <TfiLayoutGrid3Alt className="fs-4" />
-                  <span className="small">Per le aziende</span>
+                  <TfiLayoutGrid3Alt
+                    className="fs-4"
+                    style={{ width: "20px" }}
+                  />
+                  <div className="d-flex align-items-center">
+                    <span className="small">Per le aziende</span>
+                    <span className="custom-caret ms-1"></span>
+                  </div>
                 </div>
               }
             >
-              <Container style={{ width: "400px" }}>
-                <Row className=" d-flex">
-                  <Col className=" col-6">
+              <Container
+                style={{
+                  width: "700px",
+                  maxHeight: "500px",
+                  overflowY: "auto",
+                }}
+                className=" p-5"
+              >
+                <Row className=" d-flex justify-content-between">
+                  <Col className=" col-5">
                     <h4>Le mie app</h4>
                     <ul className=" list-unstyled">
-                      <li>
+                      <li className=" mt-5 mb-4">
                         <a
                           href="#"
-                          className=" text-decoration-none text-black fw-semibold nav-hover"
+                          className=" text-decoration-none text-black fw-semibold"
                         >
-                          <IoMdCompass className=" text-primary" />
+                          <IoMdCompass className=" text-primary fs-2 me-3" />
                           Trova nuovi clienti
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
-                          className=" text-decoration-none text-black fw-semibold nav-hover"
+                          className=" text-decoration-none text-black fw-semibold"
                         >
-                          <MdGroups className=" text-primary" />
+                          <MdGroups className=" text-primary fs-2 me-3" />
                           Gruppi
                         </a>
                       </li>
                       <h5 className=" text-secondary fw-semibold">Talent</h5>
-                      <li>
+                      <li className=" mt-4 mb-4">
                         <a
                           href="#"
-                          className=" text-decoration-none text-black fw-semibold nav-hover"
+                          className=" text-decoration-none text-black fw-semibold"
                         >
-                          <FaChalkboard className=" text-primary" />
+                          <FaChalkboard className=" text-primary fs-2 me-3" />
                           Assumi con l'IA
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
-                          className=" text-decoration-none text-black fw-semibold nav-hover"
+                          className=" text-decoration-none text-black fw-semibold"
                         >
-                          <VscGraph className=" text-primary" />
+                          <VscGraph className=" text-primary fs-2 me-3" />
                           Talent Insight
                         </a>
                       </li>
                       <h5 className=" text-secondary fw-semibold">Vendite</h5>
-                      <li>
+                      <li className=" mt-4">
                         <a
                           href="#"
-                          className=" text-decoration-none text-black fw-semibold nav-hover"
+                          className=" text-decoration-none text-black fw-semibold"
                         >
-                          <FaInfoCircle className=" text-primary" />
+                          <FaInfoCircle className=" text-primary fs-2 me-3" />
                           MarketPlace dei servizi
                         </a>
                       </li>
                     </ul>
                   </Col>
+                  <div className="vr d-none d-lg-block p-0"></div>
                   <Col className=" col-6">
                     <h4>Scopri altro per il business</h4>
                     <ul className=" list-unstyled">
-                      <li>
+                      <li className=" mt-5 mb-4">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -308,7 +334,7 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -319,7 +345,7 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -330,7 +356,7 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -341,7 +367,7 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -352,7 +378,7 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-4">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -363,7 +389,7 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <li>
+                      <li className=" mb-5">
                         <a
                           href="#"
                           className=" text-decoration-none text-black fw-semibold nav-hover"
@@ -374,9 +400,13 @@ function NavBarLink() {
                           </span>
                         </a>
                       </li>
-                      <h6>
+                      <h6 className=" d-flex align-items-center gap-2">
                         Crea una pagina aziendale{" "}
-                        <span className=" fs-3">+</span>
+                        <span
+                          style={{ fontSize: "25px", paddingBottom: "3px" }}
+                        >
+                          +
+                        </span>
                       </h6>
                     </ul>
                   </Col>
