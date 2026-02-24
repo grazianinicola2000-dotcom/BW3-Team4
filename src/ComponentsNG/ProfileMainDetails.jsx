@@ -21,9 +21,6 @@ const ProfileMainDetails = () => {
     dispatch(getProfile());
   }, []);
 
-  {
-    console.log(profileDetails);
-  }
   return (
     <section className="rounded-4 overflow-hidden">
       <Row>
@@ -79,7 +76,7 @@ const ProfileMainDetails = () => {
         </div>
         <div
           onClick={() => {
-            (console.log("click"), dispatch(openProfileEditForm()));
+            dispatch(openProfileEditForm());
           }}
           id="editBtnContainer"
           className="m-0 rounded-circle"
