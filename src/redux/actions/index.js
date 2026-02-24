@@ -111,3 +111,95 @@ export const uploadProfilePicture = (userId, file) => {
     }
   };
 };
+
+// EXPERIENCE
+export const GET_EXPERIENCES = "GET_EXPERIENCES";
+export const GET_EXPERIENCES_LOADING = "GET_EXPERIENCES_LOADING";
+export const GET_EXPERIENCES_ERROR = "GET_EXPERIENCES_ERROR";
+export const ADD_EXPERIENCE = "ADD_EXPERIENCE";
+export const EDIT_EXPERIENCE = "UPDATE_EXPERIENCE";
+export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
+
+// GET EXPERIENCE
+export const getExperiences = (userId) => {
+  return async (dispatch) => {
+    const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
+    const authorizationNG =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+    dispatch({ type: GET_EXPERIENCES_LOADING });
+
+    try {
+      const response = await fetch(endpoint, {
+        headers: {
+          Authorization: `Bearer ${authorizationNG}`,
+        },
+      });
+
+      if (!response.ok) throw new Error();
+
+      const data = await response.json();
+
+      dispatch({
+        type: GET_EXPERIENCES,
+        payload: data,
+      });
+    } catch {
+      dispatch({ type: GET_EXPERIENCES_ERROR });
+    }
+  };
+};
+
+// EDIT EXPERIENCE
+
+export const updateExperience = (userId, expId, expData) => {
+  return async (dispatch) => {
+    const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
+    const authorizationNG =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+    try {
+      const response = await fetch(endpoint, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${authorizationNG}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(expData),
+      });
+      if (!response.ok) throw new Error();
+      const data = await response.json();
+
+      dispatch({
+        type: EDIT_EXPERIENCE,
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+// DELETE EXPERIENCE
+
+export const deleteExperience = (userId, expId) => {
+  return async (dispatch) => {
+    const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
+    const authorizationNG =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+    try {
+      const response = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${authorizationNG}`,
+        },
+      });
+      if (!response.ok) throw new Error();
+
+      dispatch({
+        type: DELETE_EXPERIENCE,
+        payload: expId,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
