@@ -1,6 +1,6 @@
-import { BsPencil, BsFillPersonPlusFill } from "react-icons/bs";
-import { IoEyeSharp } from "react-icons/io5";
-import "./Aside.css";
+import { BsPencil, BsFillPersonPlusFill } from "react-icons/bs"
+import { IoEyeSharp } from "react-icons/io5"
+import "./Aside.css"
 
 const Aside = () => {
   const profiliConsultati = [
@@ -8,10 +8,10 @@ const Aside = () => {
     { id: 2, nome: "Nicola Graziani", ruolo: "UX/UI Specialist", img: "" },
     { id: 3, nome: "Cristian Cicale", ruolo: "Full Stack Developer", img: "" },
     { id: 4, nome: "Simone Goti", ruolo: "Front-End Developer", img: "" },
-  ];
+  ]
 
   return (
-    <aside className="aside-container ms-3">
+    <aside className="aside-container ms-3 mt-4">
       {/* CARD LINGUA E URL */}
       <div
         className="card shadow-none border-1 mb-2"
@@ -54,7 +54,10 @@ const Aside = () => {
       </div>
 
       {/* 2. CARD ALTRI PROFILI CONSULTATI */}
-      <div className="card shadow-none border-1 mb-2" style={{ borderRadius: '10px' }}>
+      <div
+        className="card shadow-none border-1 mb-2"
+        style={{ borderRadius: "10px" }}
+      >
         <div className="card-body p-3">
           <div className="mb-3">
             <h6 className="fw-bold text-dark mb-0" style={{ fontSize: "16px" }}>
@@ -116,7 +119,7 @@ const Aside = () => {
         />
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Aside;
+export default Aside

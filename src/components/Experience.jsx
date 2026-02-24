@@ -1,10 +1,10 @@
-import { VscBriefcase } from "react-icons/vsc";
-import { IoClose } from "react-icons/io5";
-import "./Experience.css";
+import { VscBriefcase } from "react-icons/vsc"
+import { IoClose } from "react-icons/io5"
+import "./Experience.css"
 
 const Experience = () => {
   return (
-    <section className="experience-section mt-3">
+    <section className="experience-section mt-3 p-0">
       <div
         className="card shadow-none border-1"
         style={{ borderRadius: "10px" }}
@@ -60,7 +60,7 @@ const Experience = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Experience;
+export default Experience

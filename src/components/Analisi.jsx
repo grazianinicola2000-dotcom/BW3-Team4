@@ -1,6 +1,6 @@
-import { IoEyeSharp } from "react-icons/io5";
-import { BsPeopleFill, BsBarChartLineFill, BsArrowRight } from "react-icons/bs";
-import "./ProfiloBoxes.css";
+import { IoEyeSharp } from "react-icons/io5"
+import { BsPeopleFill, BsBarChartLineFill, BsArrowRight } from "react-icons/bs"
+import "./ProfiloBoxes.css"
 
 const Analisi = () => {
   return (
@@ -49,7 +49,7 @@ const Analisi = () => {
         </span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Analisi;
+export default Analisi

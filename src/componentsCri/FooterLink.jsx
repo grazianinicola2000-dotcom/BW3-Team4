@@ -7,7 +7,7 @@ const FooterLink = () => {
   return (
     <Container>
       <Row>
-        <Col className=" d-flex gap-5 small">
+        <Col className=" d-flex gap-5 small p-0 mt-5">
           <ul className=" list-unstyled d-flex flex-column gap-3 me-3 small">
             <li>
               <a href="#" className=" text-decoration-none text-secondary">
@@ -80,10 +80,10 @@ const FooterLink = () => {
             </li>
           </ul>
         </Col>
-        <p className=" fw-semibold mt-2 mb-5" style={{ fontSize: "12px" }}>
+        <p className=" fw-semibold mt-2 mb-5 p-0" style={{ fontSize: "12px" }}>
           Linkedin Corporation © {new Date().getFullYear()}
         </p>
-        <Col className=" d-flex gap-5 small">
+        <Col className=" d-flex gap-5 small p-0">
           <ul className=" list-unstyled d-flex flex-column gap-3 me-3 small">
             <li className="d-flex align-items-center gap-2">
               <BsFillQuestionCircleFill className=" mb-3 fs-5 text-secondary" />
@@ -133,7 +133,7 @@ const FooterLink = () => {
             <select
               id="lingua"
               name="lingua"
-              className=" d-block border border-black rounded-1 w-25 p-1"
+              className=" d-block border border-black rounded-1 w-50 p-1"
             >
               <option value="">italiano</option>
               <option value="linkedin">inglese</option>
