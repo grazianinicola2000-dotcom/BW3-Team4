@@ -16,7 +16,7 @@ import { FaChalkboard } from "react-icons/fa"
 import { VscGraph } from "react-icons/vsc"
 import { FaInfoCircle } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
-import getProfile from "../redux/actions"
+import { getProfile } from "../redux/actions"
 import { useEffect } from "react"
 
 function NavBarLink() {
