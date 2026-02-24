@@ -242,7 +242,7 @@ function NavBarLink() {
             <div className="vr d-none d-lg-block"></div>
 
             <NavDropdown
-              id="user-dropdown"
+              id="second-dropdown"
               className="d-none d-lg-block text-center no-caret-dropdown"
               align="end"
               title={

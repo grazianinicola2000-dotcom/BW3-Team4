@@ -2,6 +2,27 @@
   border-bottom: 2px solid black;
 }
 
+@media (min-width: 992px) {
+  #user-dropdown + .dropdown-menu,
+  #second-dropdown + .dropdown-menu {
+    margin-top: 35px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #user-dropdown + .dropdown-menu,
+  #second-dropdown + .dropdown-menu {
+    margin-top: 25px;
+  }
+}
+
+@media (min-width: 1400px) {
+  #user-dropdown + .dropdown-menu,
+  #second-dropdown + .dropdown-menu {
+    margin-top: 15px;
+  }
+}
+
 .no-caret-dropdown .dropdown-toggle::after {
   display: none !important;
 }
