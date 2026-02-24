@@ -1,0 +1,54 @@
+.profile-details-bg {
+  height: 200px;
+}
+
+#profileSection {
+  position: relative;
+}
+
+#porfileSectionCamerabutton {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#porfileSectionCamerabutton:hover {
+  background-color: gainsboro !important;
+}
+
+#profileImg {
+  position: absolute;
+  bottom: -45px;
+  left: 30px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profileImg img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+#editBtnContainer {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#editBtnContainer:hover {
+  background-color: gainsboro !important;
+}
