@@ -53,11 +53,8 @@ const Aside = () => {
         </div>
       </div>
 
-      {/* CARD ALTRI PROFILI CONSULTATI */}
-      <div
-        className="card shadow-none border-1 mb-2"
-        style={{ borderRadius: "10px" }}
-      >
+      {/* 2. CARD ALTRI PROFILI CONSULTATI */}
+      <div className="card shadow-none border-1 mb-2" style={{ borderRadius: '10px' }}>
         <div className="card-body p-3">
           <div className="mb-3">
             <h6 className="fw-bold text-dark mb-0" style={{ fontSize: "16px" }}>
