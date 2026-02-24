@@ -39,7 +39,7 @@ function NavBarLink() {
       expand="lg"
       className=" bg-white border-bottom p-0 sticky-top top-0 z-3"
     >
-      <Container className="d-flex align-items-center gap-5 justify-content-center gap-lg-3">
+      <Container className="d-flex align-items-center gap-2">
         <div className="d-flex align-items-center">
           <Navbar.Brand href="#home" className="p-0">
             <FaLinkedin className=" d-none d-lg-block text-primary display-5" />
