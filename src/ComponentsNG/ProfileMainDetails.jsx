@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getProfile from "../redux/actions";
+import { getProfile } from "../redux/actions";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import "./ProfileMainDetails.css";
 import { openProfileEditForm } from "../redux/actions";
+import ProfileEditForm from "./ProfileEditForm";
 
 const ProfileMainDetails = () => {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const ProfileMainDetails = () => {
           <i id="editBtn" className="bi bi-pencil"></i>
         </div>
       </section>
+      <ProfileEditForm />
     </section>
   );
 };

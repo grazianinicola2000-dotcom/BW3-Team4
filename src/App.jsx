@@ -1,7 +1,12 @@
 import "./App.css";
+import ProfileMainDetails from "./ComponentsNG/ProfileMainDetails";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <ProfileMainDetails />
+    </>
+  );
 }
 
 export default App;
