@@ -6,6 +6,7 @@ import Analisi from "./components/Analisi"
 import Experience from "./components/Experience"
 import Aside from "./components/Aside"
 import FooterLink from "./componentsCri/FooterLink"
+import AsideHome from "./components/AsideHome"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <ConsigliatoPerTe />
         <Analisi />
         <Experience />
+        <AsideHome/>
       </div>
       <Aside />
       <FooterLink />
