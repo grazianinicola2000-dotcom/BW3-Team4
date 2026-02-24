@@ -1,7 +1,12 @@
 import "./App.css";
+import Experience from "./components/Experience";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <Experience />
+    </>
+  );
 }
 
 export default App;
