@@ -13,10 +13,13 @@ export const closeProfileEditForm = () => ({
   type: CLOSE_PROFILE_EDIT_FORM,
 });
 
-export const getProfile = function () {
+export const getProfile = function (userId) { 
   return async (dispatch) => {
     dispatch({ type: GET_PROFILE_LOADING });
-    const profileEndpoint = "https://striveschool-api.herokuapp.com/api/profile/me";
+    
+    const target = userId ? userId : "me";
+    const profileEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${target}`;
+    
     const authorizationNG =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
 

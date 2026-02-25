@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BsPencil, BsFillPersonPlusFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import "./Aside.css";
 
 const Aside = () => {
@@ -14,19 +15,15 @@ const Aside = () => {
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
-        
         const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
           headers: { "Authorization": `Bearer ${MY_TOKEN}` }
         });
 
         if (response.ok) {
           const allProfiles = await response.json();
-          
-         
           const myTeam = allProfiles.filter(user => 
             teamUsernames.includes(user.username)
           );
-
           setProfiliTeam(myTeam);
         }
       } catch (error) {
@@ -80,18 +77,28 @@ const Aside = () => {
           ) : profiliTeam.length > 0 ? (
             profiliTeam.map((profilo) => (
               <div key={profilo._id} className="d-flex align-items-start mb-3 border-bottom pb-3 last-child-no-border">
-                <img
-                  src={profilo.image || "https://via.placeholder.com/48"}
-                  alt={profilo.name}
-                  className="rounded-circle flex-shrink-0 me-2"
-                  width="48"
-                  height="48"
-                  style={{ objectFit: "cover", border: "1px solid #eee" }}
-                />
+                
+                <Link to={`/profile/${profilo._id}`}>
+                  <img
+                    src={profilo.image || "https://via.placeholder.com/48"}
+                    alt={profilo.name}
+                    className="rounded-circle flex-shrink-0 me-2"
+                    width="48"
+                    height="48"
+                    style={{ objectFit: "cover", border: "1px solid #eee" }}
+                  />
+                </Link>
                 <div className="w-100">
-                  <div className="fw-bold text-dark" style={{ fontSize: "14px" }}>
-                    {profilo.name} {profilo.surname}
-                  </div>
+                  
+                  <Link 
+                    to={`/profile/${profilo._id}`} 
+                    className="text-decoration-none"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    <div className="fw-bold text-dark name-link" style={{ fontSize: "14px" }}>
+                      {profilo.name} {profilo.surname}
+                    </div>
+                  </Link>
                   <div className="text-secondary mb-2" style={{ fontSize: "12px", lineHeight: "1.2" }}>
                     {profilo.title || "Epicode Student"}
                   </div>

@@ -1,8 +1,4 @@
-import {
-  BsInfoSquareFill,
-  BsChevronDown,
-  BsChevronRight,
-} from "react-icons/bs";
+import { BsInfoSquareFill, BsChevronDown } from "react-icons/bs";
 import "./Aside.css";
 
 const AsideHome = () => {
@@ -77,7 +73,6 @@ const AsideHome = () => {
           <button className="btn btn-light btn-sm fw-bold text-secondary d-flex align-items-center p-1 px-2 border-0 bg-transparent hover-bg-light mb-4">
             Visualizza altro <BsChevronDown className="ms-1" />
           </button>
-
         </div>
       </div>
 
@@ -94,24 +89,16 @@ const AsideHome = () => {
           className="d-flex flex-wrap justify-content-center gap-2 mb-2"
           style={{ fontSize: "12px" }}
         >
-          <span className="text-secondary cursor-pointer hover-blue">
-            Informazioni
-          </span>
-          <span className="text-secondary cursor-pointer hover-blue">
-            Accessibilità
-          </span>
-          <span className="text-secondary cursor-pointer hover-blue">
-            Centro assistenza
-          </span>
+          <span className="text-secondary">Informazioni</span>
+          <span className="text-secondary">Accessibilità</span>
+          <span className="text-secondary">Centro assistenza</span>
         </div>
         <div
           className="d-flex flex-wrap justify-content-center gap-2 mb-2"
           style={{ fontSize: "12px" }}
         >
-          <span className="text-secondary cursor-pointer hover-blue">
-            Privacy e condizioni <BsChevronDown style={{ fontSize: "10px" }} />
-          </span>
-          <span className="text-secondary cursor-pointer hover-blue">
+          <span className="text-secondary">Privacy e condizioni</span>
+          <span className="text-secondary">
             Opzioni per gli annunci pubblicitari
           </span>
         </div>
@@ -119,23 +106,15 @@ const AsideHome = () => {
           className="d-flex flex-wrap justify-content-center gap-2 mb-2"
           style={{ fontSize: "12px" }}
         >
-          <span className="text-secondary cursor-pointer hover-blue">
-            Pubblicità
-          </span>
-          <span className="text-secondary cursor-pointer hover-blue">
-            Servizi alle aziende <BsChevronDown style={{ fontSize: "10px" }} />
-          </span>
+          <span className="text-secondary">Pubblicità</span>
+          <span className="text-secondary">Servizi alle aziende</span>
         </div>
         <div
           className="d-flex flex-wrap justify-content-center gap-2 mb-3"
           style={{ fontSize: "12px" }}
         >
-          <span className="text-secondary cursor-pointer hover-blue">
-            Scarica l'app LinkedIn
-          </span>
-          <span className="text-secondary cursor-pointer hover-blue">
-            Altro
-          </span>
+          <span className="text-secondary">Scarica l'app LinkedIn</span>
+          <span className="text-secondary">Altro</span>
         </div>
         <div className="d-flex align-items-center justify-content-center gap-2 pb-4">
           <img

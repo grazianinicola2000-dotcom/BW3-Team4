@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../redux/actions";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom"; 
 import "./ProfileMainDetails.css";
 import { openProfileEditForm } from "../redux/actions";
 import ProfileEditForm from "./ProfileEditForm";
 
 const ProfileMainDetails = () => {
   const dispatch = useDispatch();
+  const { userId } = useParams(); 
 
   const profileDetails = useSelector((currentState) => {
     return currentState.profile.profileDetails;
@@ -18,12 +20,9 @@ const ProfileMainDetails = () => {
   });
 
   useEffect(() => {
-    dispatch(getProfile());
-  }, []);
+    dispatch(getProfile(userId));
+  }, [userId]); 
 
-  {
-    console.log(profileDetails);
-  }
   return (
     <section className="rounded-4 overflow-hidden">
       <Row>
@@ -38,9 +37,11 @@ const ProfileMainDetails = () => {
               <img src={profileDetails.image} className="rounded-circle border border-5 border-light" alt="profile_img" />
             )}
           </div>
-          <div id="porfileSectionCamerabutton" className="m-0 bg-light rounded-circle">
-            <i className="m-0 bi bi-camera-fill text-primary"></i>
-          </div>
+          {!userId && (
+            <div id="porfileSectionCamerabutton" className="m-0 bg-light rounded-circle">
+              <i className="m-0 bi bi-camera-fill text-primary"></i>
+            </div>
+          )}
         </Col>
       </Row>
       <section className="p-5 position-relative">
@@ -77,15 +78,17 @@ const ProfileMainDetails = () => {
             Enhance profile
           </Button>
         </div>
-        <div
-          onClick={() => {
-            (console.log("click"), dispatch(openProfileEditForm()));
-          }}
-          id="editBtnContainer"
-          className="m-0 rounded-circle"
-        >
-          <i id="editBtn" className="bi bi-pencil"></i>
-        </div>
+        {!userId && (
+          <div
+            onClick={() => {
+              dispatch(openProfileEditForm());
+            }}
+            id="editBtnContainer"
+            className="m-0 rounded-circle"
+          >
+            <i id="editBtn" className="bi bi-pencil"></i>
+          </div>
+        )}
       </section>
       <ProfileEditForm />
     </section>
