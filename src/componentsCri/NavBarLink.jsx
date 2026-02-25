@@ -18,6 +18,7 @@ import { FaInfoCircle } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import { getProfile } from "../redux/actions"
 import { useEffect } from "react"
+import { NavLink } from "react-router-dom"
 
 function NavBarLink() {
   const profileDetails = useSelector((currentState) => {
@@ -72,7 +73,7 @@ function NavBarLink() {
 
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className=" d-flex flex-row align-items-center gap-4 justify-content-between">
-            <Nav.Link className=" text-center nav-hover">
+            <Nav.Link as={NavLink} to="/" className=" text-center nav-hover">
               <IoHomeSharp className="fs-4" />
               <div className="small">Home</div>
             </Nav.Link>
@@ -82,7 +83,11 @@ function NavBarLink() {
               <div className="small">La mia rete</div>
             </Nav.Link>
 
-            <Nav.Link className=" text-center nav-hover">
+            <Nav.Link
+              as={NavLink}
+              to="/jobs"
+              className=" text-center nav-hover"
+            >
               <IoBriefcase className="fs-4" />
               <div className="small">Lavoro</div>
             </Nav.Link>
@@ -163,7 +168,11 @@ function NavBarLink() {
                     </span>
                   </Col>
                   <div className=" d-flex justify-content-center gap-1 my-3">
-                    <Button className=" bg-light text-primary text-start rounded-5 fw-semibold">
+                    <Button
+                      as={NavLink}
+                      to="/profile"
+                      className=" bg-light text-primary text-start rounded-5 fw-semibold"
+                    >
                       Visualizza profilo
                     </Button>
                     <Button className=" text-start rounded-5 fw-semibold">

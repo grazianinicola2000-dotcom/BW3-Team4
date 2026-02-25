@@ -22,7 +22,7 @@ const CreatePostLink = () => {
   }, [])
 
   return (
-    <Container>
+    <Container className=" px-0">
       <Row>
         <Col>
           <Col className=" d-flex flex-column bg-white p-4 rounded-3 border mt-4">
@@ -44,29 +44,29 @@ const CreatePostLink = () => {
             </div>
             <div className=" d-flex justify-content-around mt-4">
               <div
-                className="d-flex align-items-center"
+                className="d-flex align-items-center home-hover rounded-3"
                 style={{ cursor: "pointer" }}
               >
                 <PiVideoFill className="fs-3 text-success" />
-                <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2">
                   Video
                 </Button>
               </div>
               <div
-                className="d-flex align-items-center"
+                className="d-flex align-items-center home-hover rounded-3"
                 style={{ cursor: "pointer" }}
               >
                 <HiMiniPhoto className="fs-3 text-primary" />
-                <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2">
                   Foto
                 </Button>
               </div>
               <div
-                className="d-flex align-items-center"
+                className="d-flex align-items-center home-hover rounded-3"
                 style={{ cursor: "pointer" }}
               >
                 <RiArticleLine className="fs-3 text-danger" />
-                <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2">
                   Scrivi un articolo
                 </Button>
               </div>

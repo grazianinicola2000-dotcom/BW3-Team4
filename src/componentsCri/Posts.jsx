@@ -63,7 +63,7 @@ const Posts = () => {
   }, [])
 
   return (
-    <Container className=" mt-3">
+    <Container className=" mt-3 px-0">
       <Row className="justify-content-center">
         {loading && (
           <Spinner className="spinner" animation="border" role="status">
@@ -101,24 +101,24 @@ const Posts = () => {
                     </Button>{" "}
                   </div>
                   <p>
-                    {expandedPosts.includes(p.id)
+                    {expandedPosts.includes(p._id)
                       ? p.text
                       : p.text.slice(0, limit)}
 
                     {p.text.length > limit &&
-                      !expandedPosts.includes(p.id) &&
+                      !expandedPosts.includes(p._id) &&
                       "... "}
 
                     {p.text.length > limit && (
                       <span
-                        onClick={() => togglePost(p.id)}
+                        onClick={() => togglePost(p._id)}
                         style={{
                           color: "blue",
                           cursor: "pointer",
                           marginLeft: "5px",
                         }}
                       >
-                        {expandedPosts.includes(p.id)
+                        {expandedPosts.includes(p._id)
                           ? "Mostra meno"
                           : "Leggi di più"}
                       </span>
@@ -154,40 +154,40 @@ const Posts = () => {
                     </div>
                   )}
                   <hr />
-                  <section className="d-flex flex-row align-items-center justify-content-around">
+                  <section className="d-flex flex-row align-items-center justify-content-around flex-grow-1">
                     <div
-                      className="d-flex flex-column align-items-center"
+                      className="d-flex flex-column align-items-center home-hover rounded-2"
                       style={{ cursor: "pointer" }}
                     >
                       <AiOutlineLike className="fs-5" />
-                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                      <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2 home-hover">
                         Consiglia
                       </Button>
                     </div>
                     <div
-                      className="d-flex flex-column align-items-center"
+                      className="d-flex flex-column align-items-center home-hover rounded-2"
                       style={{ cursor: "pointer" }}
                     >
                       <FaRegCommentDots className="fs-5" />
-                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                      <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2 home-hover">
                         Commenta
                       </Button>
                     </div>
                     <div
-                      className="d-flex flex-column align-items-center"
+                      className="d-flex flex-column align-items-center home-hover rounded-2"
                       style={{ cursor: "pointer" }}
                     >
                       <BiRepost className="fs-5" />
-                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                      <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2 home-hover">
                         Diffondi il post
                       </Button>
                     </div>
                     <div
-                      className="d-flex flex-column align-items-center"
+                      className="d-flex flex-column align-items-center home-hover rounded-2"
                       style={{ cursor: "pointer" }}
                     >
                       <RiShareForwardLine className="fs-5" />
-                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                      <Button className=" bg-transparent text-black border-0 rounded fw-semibold px-2 home-hover">
                         Invia
                       </Button>
                     </div>
