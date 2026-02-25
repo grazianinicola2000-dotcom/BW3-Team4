@@ -21,9 +21,6 @@ const ProfileMainDetails = () => {
     dispatch(getProfile())
   }, [])
 
-  {
-    console.log(profileDetails)
-  }
   return (
     <section className=" overflow-hidden bg-white border border-secondary-subtle custom-rounded mt-4 mb-2">
       <Row>
@@ -120,7 +117,7 @@ const ProfileMainDetails = () => {
         </div>
         <div
           onClick={() => {
-            ;(console.log("click"), dispatch(openProfileEditForm()))
+            dispatch(openProfileEditForm())
           }}
           id="editBtnContainer"
           className="m-0 rounded-circle"

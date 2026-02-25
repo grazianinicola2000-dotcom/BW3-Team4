@@ -1,8 +1,27 @@
 import { VscBriefcase } from "react-icons/vsc"
 import { IoClose } from "react-icons/io5"
 import "./Experience.css"
+import { useDispatch, useSelector } from "react-redux"
+import ExperienceItem from "./ExperienceItem"
+import { getExperiences, openExperienceEditForm } from "../redux/actions"
+import ExperienceEditForm from "../ComponentsNG/ExperienceEditForm"
+import { useEffect } from "react"
 
 const Experience = () => {
+  const dispatch = useDispatch()
+  const experiences = useSelector(
+    (currentState) => currentState.experiences.experiences,
+  )
+  const profileDetails = useSelector(
+    (currentState) => currentState.profile.profileDetails,
+  )
+
+  useEffect(() => {
+    if (profileDetails?._id) {
+      dispatch(getExperiences(profileDetails._id))
+    }
+  }, [profileDetails])
+
   return (
     <section className="experience-section mt-3 p-0">
       <div
@@ -27,38 +46,55 @@ const Experience = () => {
             </p>
 
             {/* Placeholder lavoro */}
-            <div className="d-flex align-items-center mb-3">
-              <div className="job-placeholder me-3 d-flex align-items-center justify-content-center">
-                <VscBriefcase
-                  className="text-secondary fs-4"
-                  style={{ color: "#B2B2B2" }}
-                />
+            {experiences?.length === 0 && (
+              <div className="d-flex align-items-center mb-3">
+                <div className="job-placeholder me-3 d-flex align-items-center justify-content-center">
+                  <VscBriefcase
+                    className="text-secondary fs-4"
+                    style={{ color: "#B2B2B2" }}
+                  />
+                </div>
+                <div>
+                  <div
+                    className="fw-bold"
+                    style={{ fontSize: "16px", color: "#B2B2B2" }}
+                  >
+                    Job Title
+                  </div>
+                  <div style={{ fontSize: "14px", color: "#B2B2B2" }}>
+                    Organization
+                  </div>
+                  <div
+                    className="text-muted opacity-50"
+                    style={{ fontSize: "13px", color: "#B2B2B2" }}
+                  >
+                    2023 - present
+                  </div>
+                </div>
               </div>
-              <div>
-                <div
-                  className="fw-bold"
-                  style={{ fontSize: "16px", color: "#B2B2B2" }}
-                >
-                  Job Title
-                </div>
-                <div style={{ fontSize: "14px", color: "#B2B2B2" }}>
-                  Organization
-                </div>
-                <div
-                  className="text-muted opacity-50"
-                  style={{ fontSize: "13px", color: "#B2B2B2" }}
-                >
-                  2023 - present
-                </div>
-              </div>
-            </div>
+            )}
+            {experiences?.length > 0 &&
+              experiences.map((exp) => (
+                <ExperienceItem key={exp._id} data={exp} />
+              ))}
 
-            <button className="btn btn-outline-primary rounded-pill fw-bold px-3 py-1 border-1">
+            <button
+              onClick={() => {
+                dispatch(
+                  openExperienceEditForm({
+                    mode: "add",
+                    experience: null,
+                  }),
+                )
+              }}
+              className="btn btn-outline-primary rounded-pill fw-bold px-3 py-1 border-1"
+            >
               Add experience
             </button>
           </div>
         </div>
       </div>
+      <ExperienceEditForm />
     </section>
   )
 }
