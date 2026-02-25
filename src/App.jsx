@@ -42,14 +42,11 @@ function App() {
           element={
             <Container>
               <Row>
-                <Col className="d-none d-lg-block" lg={2}>
-                  <AsideHomeProfile />
-                </Col>
-                <Col xs={12} lg={7}>
-                  <Jobs />
-                </Col>
                 <Col className="d-none d-lg-block" lg={3}>
-                  <AsideHome />
+                  <AsideJobProfile />
+                </Col>
+                <Col xs={12} lg={9}>
+                  <Jobs />
                 </Col>
               </Row>
             </Container>
@@ -58,23 +55,25 @@ function App() {
         <Route
           path="/profile/:userId"
           element={
-            <Container>
-              <Row>
-                <Col className="col-12 col-lg-8">
-                  <ProfileMainDetails />
-                  <ConsigliatoPerTe />
-                  <Analisi />
-                  <Experience />
-                </Col>
-                <Col className="d-none d-lg-block col-4">
-                  <AsideJobProfile />
-                </Col>
-              </Row>
-            </Container>
+            <>
+              <Container>
+                <Row>
+                  <Col className="col-12 col-lg-8">
+                    <ProfileMainDetails />
+                    <ConsigliatoPerTe />
+                    <Analisi />
+                    <Experience />
+                  </Col>
+                  <Col>
+                    <Aside />
+                  </Col>
+                </Row>
+              </Container>
+              <FooterLink />
+            </>
           }
         />
       </Routes>
-      <FooterLink />
     </>
   );
 }

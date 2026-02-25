@@ -179,7 +179,7 @@ function NavBarLink() {
                     <span className={loading || !profileDetails ? "placeholder col-2 m-0" : "m-0"}>{!loading && profileDetails?.title}</span>
                   </Col>
                   <div className=" d-flex justify-content-center gap-1 my-3">
-                    <Button as={Link} to={`/profile/${profileDetails._id}`} className=" bg-light text-primary text-start rounded-5 fw-semibold">
+                    <Button as={Link} to={`/profile/${profileDetails?._id}`} className=" bg-light text-primary text-start rounded-5 fw-semibold">
                       Visualizza profilo
                     </Button>
                     <Button className=" text-start rounded-5 fw-semibold">Verifica ora</Button>
