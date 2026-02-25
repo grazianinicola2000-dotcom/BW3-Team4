@@ -49,6 +49,7 @@ const Posts = () => {
                     segui +
                   </Button>{" "}
                 </h5>
+                <img src={p.user.image} alt="" />
                 <p>{p.text}</p>
                 <span className=" small">at {p.createdAt.slice(0, 10)}</span>
               </div>
