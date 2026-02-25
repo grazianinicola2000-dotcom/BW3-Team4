@@ -37,7 +37,7 @@ const Aside = () => {
   }, []);
 
   return (
-    <aside className="aside-container ms-3">
+    <aside className="aside-container ms-3 mt-4">
       {/* CARD LINGUA E URL */}
       <div className="card shadow-none border-1 mb-2 custom-rounded-aside">
         <div className="card-body p-3">
@@ -61,8 +61,11 @@ const Aside = () => {
         </div>
       </div>
 
-      {/* CARD TEAM */}
-      <div className="card shadow-none border-1 mb-2 custom-rounded-aside">
+      {/* 2. CARD ALTRI PROFILI CONSULTATI */}
+      <div
+        className="card shadow-none border-1 mb-2"
+        style={{ borderRadius: "10px" }}
+      >
         <div className="card-body p-3">
           <div className="mb-3">
             <h6 className="fw-bold text-dark mb-0" style={{ fontSize: "16px" }}> Altri profili consultati </h6>
@@ -122,7 +125,7 @@ const Aside = () => {
         />
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Aside;
+export default Aside

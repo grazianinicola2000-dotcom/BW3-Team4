@@ -6,6 +6,7 @@
   #user-dropdown + .dropdown-menu,
   #second-dropdown + .dropdown-menu {
     margin-top: 35px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -13,6 +14,7 @@
   #user-dropdown + .dropdown-menu,
   #second-dropdown + .dropdown-menu {
     margin-top: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -20,6 +22,7 @@
   #user-dropdown + .dropdown-menu,
   #second-dropdown + .dropdown-menu {
     margin-top: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 }
 

@@ -52,3 +52,7 @@
 #editBtnContainer:hover {
   background-color: gainsboro !important;
 }
+
+.custom-rounded {
+  border-radius: 0.625rem !important;
+}
