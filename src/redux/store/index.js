@@ -4,8 +4,9 @@ import profileEditFormReducer from "../reducers/ProfileEditFormReducer";
 import { experiencesReducer } from "../reducers/experienceReducer";
 import postReducer from "../reducers/postReducer";
 import experienceEditFormReducer from "../reducers/ExperienceEditFormReducer";
-import contactInfoReducer from "../reducers/contactInfoReducer";
+import commentsReducer from "../reducers/commentsReducer";
 import jobSearchReducer from "../reducers/jobSearchReducer";
+import contactInfoReducer from "../reducers/contactInfoReducer";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     expModalState: experienceEditFormReducer,
     contactModalState: contactInfoReducer,
     searched: jobSearchReducer,
+    comments: commentsReducer,
   },
 });
 

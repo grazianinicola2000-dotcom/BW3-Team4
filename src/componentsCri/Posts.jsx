@@ -1,10 +1,17 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getPost } from "../redux/actions/post"
+import { getPost, getComments } from "../redux/actions/post"
 import { Alert, Button, Col, Container, Row, Spinner } from "react-bootstrap"
+import { useState } from "react"
+import { AiOutlineLike } from "react-icons/ai"
+import { FaRegCommentDots } from "react-icons/fa"
+import { BiRepost } from "react-icons/bi"
+import { RiShareForwardLine } from "react-icons/ri"
 
 const Posts = () => {
   const dispatch = useDispatch()
+
+  // POST
 
   const post = useSelector((currentState) => {
     return currentState.post.postDetails
@@ -18,11 +25,42 @@ const Posts = () => {
     return currentState.post.error
   })
 
+  // COMMENTI
+
+  const comments = useSelector((currentState) => currentState.comments.comments)
+  const commentsLoading = useSelector(
+    (currentState) => currentState.comments.loading,
+  )
+  const [showCommentsPosts, setShowCommentsPosts] = useState([])
+
+  const toggleComments = (postId) => {
+    if (!comments[postId]) {
+      dispatch(getComments(postId))
+    }
+
+    setShowCommentsPosts((prev) =>
+      prev.includes(postId)
+        ? prev.filter((id) => id !== postId)
+        : [...prev, postId],
+    )
+  }
+
+  // TEXT
+
+  const [expandedPosts, setExpandedPosts] = useState([])
+  const limit = 200
+
+  const togglePost = (id) => {
+    setExpandedPosts((prev) =>
+      prev.includes(id)
+        ? prev.filter((postId) => postId !== id)
+        : [...prev, id],
+    )
+  }
+
   useEffect(() => {
     dispatch(getPost())
   }, [])
-
-  console.log(post)
 
   return (
     <Container className=" mt-3">
@@ -40,22 +78,126 @@ const Posts = () => {
         {!loading &&
           !error &&
           post &&
-          post.slice(0, 20).map((p, index) => (
-            <Col key={p.id || index} className=" col-12">
-              <div className=" d-flex flex-column p-3 shadow rounded bg-white my-3">
-                <h5 className=" d-flex justify-content-between">
-                  {p.user.username || "Unknown"}
-                  <Button className=" text-primary bg-white border-0 p-0 fw-semibold">
-                    segui +
-                  </Button>{" "}
-                </h5>
-                <img src={p.user.image} alt="" />
-                <p>{p.text}</p>
-                <span className=" small">at {p.createdAt.slice(0, 10)}</span>
-              </div>
-            </Col>
-          ))}
+          post
+            .slice(-20)
+            .reverse()
+            .map((p, index) => (
+              <Col key={p.id || index} className=" col-12">
+                <div className=" d-flex flex-column p-3 border border rounded bg-white my-2">
+                  <div className=" d-flex gap-2 align-items-center mb-3">
+                    <img
+                      src={p.user.image}
+                      alt="profile"
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "100%",
+                        objectFit: "contain",
+                      }}
+                    />
+                    <h5 className=" m-0">{p.user.username || "Unknown"}</h5>
+                    <Button className=" text-primary bg-white border-0 p-0 fw-semibold flex-grow-1 text-end">
+                      segui +
+                    </Button>{" "}
+                  </div>
+                  <p>
+                    {expandedPosts.includes(p.id)
+                      ? p.text
+                      : p.text.slice(0, limit)}
+
+                    {p.text.length > limit &&
+                      !expandedPosts.includes(p.id) &&
+                      "... "}
+
+                    {p.text.length > limit && (
+                      <span
+                        onClick={() => togglePost(p.id)}
+                        style={{
+                          color: "blue",
+                          cursor: "pointer",
+                          marginLeft: "5px",
+                        }}
+                      >
+                        {expandedPosts.includes(p.id)
+                          ? "Mostra meno"
+                          : "Leggi di più"}
+                      </span>
+                    )}
+                  </p>
+                  <span className=" small">at {p.createdAt.slice(0, 10)}</span>
+                  <Button
+                    variant="link"
+                    onClick={() => toggleComments(p._id)} // usa sempre post._id
+                    className=" d-flex"
+                  >
+                    {showCommentsPosts.includes(p._id)
+                      ? "Nascondi commenti"
+                      : "Mostra commenti"}
+                  </Button>
+
+                  {showCommentsPosts.includes(p._id) && (
+                    <div className="mt-2">
+                      {commentsLoading && (
+                        <Spinner animation="border" size="sm" />
+                      )}
+                      {comments[p._id] && comments[p._id].length > 0 ? (
+                        comments[p._id].map((c) => (
+                          <div key={c._id} className="border-top pt-1">
+                            <strong>{c.author}</strong>: {c.comment}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-muted">
+                          Nessun commento disponibile
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <hr />
+                  <section className="d-flex flex-row align-items-center justify-content-around">
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <AiOutlineLike className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Consiglia
+                      </Button>
+                    </div>
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <FaRegCommentDots className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Commenta
+                      </Button>
+                    </div>
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <BiRepost className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Diffondi il post
+                      </Button>
+                    </div>
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <RiShareForwardLine className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Invia
+                      </Button>
+                    </div>
+                  </section>
+                </div>
+              </Col>
+            ))}
       </Row>
+      {console.log(comments)}
+      {console.log(post)}
     </Container>
   )
 }

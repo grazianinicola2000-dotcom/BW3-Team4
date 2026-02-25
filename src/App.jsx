@@ -15,29 +15,34 @@ function App() {
   return (
     <>
       <NavBarLink />
-      <Container>
-        <Routes>
-          <Route path="/" element={<Posts />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route
-            path="/profile"
-            element={
-              <Row>
-                <Col className=" col-12 col-lg-8">
-                  <ProfileMainDetails />
-                  <ConsigliatoPerTe />
-                  <Analisi />
-                  <Experience />
-                  <FooterLink />
-                </Col>
-                <Col className=" d-none d-lg-block col-4">
-                  <Aside />
-                </Col>
-              </Row>
-            }
-          />
-        </Routes>
-      </Container>
+      <Routes>
+        <Route
+          path="/profile"
+          element={
+            <div>
+              <ProfileMainDetails />
+              <ConsigliatoPerTe />
+              <Analisi />
+              <Experience />
+            </div>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <div>
+              <ProfileMainDetails />
+              <ConsigliatoPerTe />
+              <Analisi />
+              <Experience />
+              <AsideHomeProfile />
+              <AsideJobProfile />
+            </div>
+          }
+        />
+      </Routes>
+      <Aside />
+      <FooterLink />
     </>
   );
 }

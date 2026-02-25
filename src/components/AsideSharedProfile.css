@@ -1,0 +1,63 @@
+.custom-w-rem {
+  width: 14.5rem;
+}
+
+.profile-header-bg {
+  height: 3.5rem;
+  background-color: #a0b4c7;
+  background-image: linear-gradient(to bottom right, #a0b4c7, #dbe7f1);
+}
+
+.profile-img-container {
+  margin-top: -2.2rem;
+}
+
+.profile-img-container img {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+}
+
+.small-text {
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.x-small-text {
+  font-size: 0.75rem;
+}
+
+.premium-square {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #d98d39;
+  border-radius: 2px;
+}
+
+.hover-bg-light:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.footer-links span {
+  font-size: 0.75rem;
+  color: #666666;
+  cursor: pointer;
+}
+
+.footer-links span:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+
+.footer-logo {
+  width: 3.5rem;
+}
+
+.copyright-text {
+  font-size: 0.7rem;
+  color: #000;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
