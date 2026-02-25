@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { getPost, getComments } from "../redux/actions/post"
 import { Alert, Button, Col, Container, Row, Spinner } from "react-bootstrap"
 import { useState } from "react"
+import { AiOutlineLike } from "react-icons/ai"
+import { FaRegCommentDots } from "react-icons/fa"
+import { BiRepost } from "react-icons/bi"
+import { RiShareForwardLine } from "react-icons/ri"
 
 const Posts = () => {
   const dispatch = useDispatch()
@@ -31,7 +35,7 @@ const Posts = () => {
 
   const toggleComments = (postId) => {
     if (!comments[postId]) {
-      dispatch(getComments(postId)) // il postId qui è post._id
+      dispatch(getComments(postId))
     }
 
     setShowCommentsPosts((prev) =>
@@ -79,7 +83,7 @@ const Posts = () => {
             .reverse()
             .map((p, index) => (
               <Col key={p.id || index} className=" col-12">
-                <div className=" d-flex flex-column p-3 shadow rounded bg-white my-3">
+                <div className=" d-flex flex-column p-3 border border rounded bg-white my-2">
                   <div className=" d-flex gap-2 align-items-center mb-3">
                     <img
                       src={p.user.image}
@@ -149,6 +153,45 @@ const Posts = () => {
                       )}
                     </div>
                   )}
+                  <hr />
+                  <section className="d-flex flex-row align-items-center justify-content-around">
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <AiOutlineLike className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Consiglia
+                      </Button>
+                    </div>
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <FaRegCommentDots className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Commenta
+                      </Button>
+                    </div>
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <BiRepost className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Diffondi il post
+                      </Button>
+                    </div>
+                    <div
+                      className="d-flex flex-column align-items-center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <RiShareForwardLine className="fs-5" />
+                      <Button className="bg-white text-black border-0 rounded fw-semibold px-2">
+                        Invia
+                      </Button>
+                    </div>
+                  </section>
                 </div>
               </Col>
             ))}

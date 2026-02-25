@@ -21,9 +21,9 @@ function App() {
             <ConsigliatoPerTe />
             <Analisi />
             <Experience />
-            <FooterLink />
-            <Posts /> */}
+            <FooterLink /> */}
             <CreatePostLink />
+            <Posts />
           </Col>
           <Col className=" d-none d-lg-block col-4">
             <Aside />
