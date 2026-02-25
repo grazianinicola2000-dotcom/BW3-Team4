@@ -247,6 +247,8 @@ export const deleteExperience = (userId, expId) => {
   };
 };
 
+// EXPERIENCE PICTURE
+
 export const uploadExperiencePicture = (userId, expId, file) => {
   return async (dispatch) => {
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`;
@@ -280,3 +282,16 @@ export const uploadExperiencePicture = (userId, expId, file) => {
     }
   };
 };
+
+// CONTACT INFO
+
+export const OPEN_CONTACT_INFO_MODAL = "OPEN_CONTACT_INFO_MODAL";
+export const CLOSE_CONTACT_INFO_MODAL = "CLOSE_CONTACT_INFO_MODAL";
+
+export const openContactInfoModal = () => ({
+  type: OPEN_CONTACT_INFO_MODAL,
+});
+
+export const closeContactInfoModal = () => ({
+  type: CLOSE_CONTACT_INFO_MODAL,
+});
