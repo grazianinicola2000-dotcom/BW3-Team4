@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getJobs } from "../redux/actions";
 import { useEffect } from "react";
 import "./Jobs.css";
+import { Container } from "react-bootstrap";
 
 const Jobs = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Jobs = () => {
   }, [searched]);
 
   return (
-    <div className="card shadow-none border-1 mb-2 custom-rounded mt-4">
+    <Container className="card shadow-none border-1 mb-2 custom-rounded mt-4">
       <div className="card-body p-3 p-md-4">
         <h2 className="fw-bold mb-0 h5 text-dark">Le migliori scelte di lavoro per te</h2>
         <p className="m-0 text-secondary mb-3">In base al tuo profilo, alle tue preferenze e alle tue attività, come candidature, ricerche e salvataggi</p>
@@ -59,7 +60,7 @@ const Jobs = () => {
           })}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

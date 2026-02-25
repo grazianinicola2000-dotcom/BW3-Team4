@@ -18,7 +18,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobs, getProfile, setSearchInput } from "../redux/actions";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavBarLink() {
   const [query, setQuery] = useState("");
@@ -40,9 +40,13 @@ function NavBarLink() {
     setQuery(e.target.value);
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(setSearchInput(query));
+
+    navigate(`/jobs`);
   };
 
   useEffect(() => {
@@ -175,7 +179,7 @@ function NavBarLink() {
                     <span className={loading || !profileDetails ? "placeholder col-2 m-0" : "m-0"}>{!loading && profileDetails?.title}</span>
                   </Col>
                   <div className=" d-flex justify-content-center gap-1 my-3">
-                    <Button as={Link} to="/profile" className=" bg-light text-primary text-start rounded-5 fw-semibold">
+                    <Button as={Link} to={`/profile/${profileDetails._id}`} className=" bg-light text-primary text-start rounded-5 fw-semibold">
                       Visualizza profilo
                     </Button>
                     <Button className=" text-start rounded-5 fw-semibold">Verifica ora</Button>

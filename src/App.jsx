@@ -12,6 +12,7 @@ import Jobs from "./ComponentsNG/jobs";
 import { Route, Routes } from "react-router-dom";
 import AsideHomeProfile from "./components/AsideHomeProfile";
 import AsideJobProfile from "./components/AsideJobProfile";
+import AsideHome from "./components/AsideHome";
 
 function App() {
   return (
@@ -19,31 +20,60 @@ function App() {
       <NavBarLink />
       <Routes>
         <Route
-          path="/profile"
+          path="/"
           element={
-            <div>
-              <ProfileMainDetails />
-              <ConsigliatoPerTe />
-              <Analisi />
-              <Experience />
-            </div>
+            <Container>
+              <Row>
+                <Col className="d-none d-lg-block" lg={2}>
+                  <AsideHomeProfile />
+                </Col>
+                <Col xs={12} lg={7}>
+                  <Posts />
+                </Col>
+                <Col className="d-none d-lg-block" lg={3}>
+                  <AsideHome />
+                </Col>
+              </Row>
+            </Container>
+          }
+        />
+        <Route
+          path="/jobs"
+          element={
+            <Container>
+              <Row>
+                <Col className="d-none d-lg-block" lg={2}>
+                  <AsideHomeProfile />
+                </Col>
+                <Col xs={12} lg={7}>
+                  <Jobs />
+                </Col>
+                <Col className="d-none d-lg-block" lg={3}>
+                  <AsideHome />
+                </Col>
+              </Row>
+            </Container>
           }
         />
         <Route
           path="/profile/:userId"
           element={
-            <div>
-              <ProfileMainDetails />
-              <ConsigliatoPerTe />
-              <Analisi />
-              <Experience />
-              <AsideHomeProfile />
-              <AsideJobProfile />
-            </div>
+            <Container>
+              <Row>
+                <Col className="col-12 col-lg-8">
+                  <ProfileMainDetails />
+                  <ConsigliatoPerTe />
+                  <Analisi />
+                  <Experience />
+                </Col>
+                <Col className="d-none d-lg-block col-4">
+                  <AsideJobProfile />
+                </Col>
+              </Row>
+            </Container>
           }
         />
       </Routes>
-      <Aside />
       <FooterLink />
     </>
   );
