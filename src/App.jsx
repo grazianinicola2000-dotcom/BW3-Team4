@@ -8,25 +8,35 @@ import Aside from "./components/Aside";
 import FooterLink from "./componentsCri/FooterLink";
 import { Col, Container, Row } from "react-bootstrap";
 import Posts from "./componentsCri/Posts";
+import Jobs from "./ComponentsNG/jobs";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
       <NavBarLink />
       <Container>
-        <Row>
-          <Col className=" col-12 col-lg-8">
-            <ProfileMainDetails />
-            <ConsigliatoPerTe />
-            <Analisi />
-            <Experience />
-            <FooterLink />
-            {/* <Posts /> */}
-          </Col>
-          <Col className=" d-none d-lg-block col-4">
-            <Aside />
-          </Col>
-        </Row>
+        <Routes>
+          <Route path="/" element={<Posts />} />
+          <Route path="/jobs" element={<Jobs />} />
+          <Route
+            path="/profile"
+            element={
+              <Row>
+                <Col className=" col-12 col-lg-8">
+                  <ProfileMainDetails />
+                  <ConsigliatoPerTe />
+                  <Analisi />
+                  <Experience />
+                  <FooterLink />
+                </Col>
+                <Col className=" d-none d-lg-block col-4">
+                  <Aside />
+                </Col>
+              </Row>
+            }
+          />
+        </Routes>
       </Container>
     </>
   );

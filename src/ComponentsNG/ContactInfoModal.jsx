@@ -6,7 +6,6 @@ function ContactInfoModal() {
   const dispatch = useDispatch();
 
   const modalState = useSelector((state) => {
-    console.log("STATE:", state);
     return state.contactModalState.modalState;
   });
 
@@ -16,13 +15,12 @@ function ContactInfoModal() {
     dispatch(closeContactInfoModal());
   };
 
-  console.log(profileDetails);
   return (
     <>
       <Modal show={modalState} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {profileDetails.name} {profileDetails.surname}
+            {profileDetails?.name} {profileDetails?.surname}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -37,7 +35,7 @@ function ContactInfoModal() {
             <i className="bi bi-envelope fs-3"></i>
             <div>
               <h5 className="pt-2">Email</h5>
-              <p>{profileDetails.email}</p>
+              <p>{profileDetails?.email}</p>
             </div>
           </div>
         </Modal.Body>

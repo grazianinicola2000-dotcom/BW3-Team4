@@ -295,3 +295,57 @@ export const openContactInfoModal = () => ({
 export const closeContactInfoModal = () => ({
   type: CLOSE_CONTACT_INFO_MODAL,
 });
+
+// JOBS PAGE
+
+export const ADD_TO_FAVOURITE = "ADD_TO_FAVOURITE";
+export const REMOVE_FROM_FAVOURITE = "REMOVE_FROM_FAVOURITE";
+export const GET_JOBS = "GET_JOBS";
+export const GET_JOBS_ERROR = "GET_JOBS_ERROR";
+export const SET_SEARCH = "SET_SEARCH";
+export const GET_JOBS_LOADING = "GET_JOBS_LOADING";
+
+export const addToCartAction = (data) => ({
+  type: ADD_TO_FAVOURITE,
+  payload: data,
+});
+
+export const removeFromCartAction = (i) => ({
+  type: REMOVE_FROM_FAVOURITE,
+  payload: i,
+});
+
+export const setSearchInput = (formValue) => ({
+  type: SET_SEARCH,
+  payload: formValue,
+});
+
+export const getJobs = (query) => {
+  const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";
+
+  return async (dispatch) => {
+    dispatch({
+      type: GET_JOBS_LOADING,
+    });
+
+    try {
+      const response = await fetch(baseEndpoint + query + "&limit=20");
+      if (response.ok) {
+        const { data } = await response.json();
+        dispatch({
+          type: GET_JOBS,
+          payload: data,
+        });
+      } else {
+        dispatch({
+          type: GET_JOBS_ERROR,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: GET_JOBS_ERROR,
+      });
+    }
+  };
+};
