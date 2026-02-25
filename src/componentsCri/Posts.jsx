@@ -31,7 +31,7 @@ const Posts = () => {
 
   const toggleComments = (postId) => {
     if (!comments[postId]) {
-      dispatch(getComments(postId)) // carica commenti solo se non ci sono
+      dispatch(getComments(postId)) // il postId qui è post._id
     }
 
     setShowCommentsPosts((prev) =>
@@ -75,7 +75,7 @@ const Posts = () => {
           !error &&
           post &&
           post
-            .slice(0, -20)
+            .slice(-20)
             .reverse()
             .map((p, index) => (
               <Col key={p.id || index} className=" col-12">
@@ -121,41 +121,40 @@ const Posts = () => {
                     )}
                   </p>
                   <span className=" small">at {p.createdAt.slice(0, 10)}</span>
-                  <div className="mt-2">
-                    <Button
-                      variant="link"
-                      className="p-0"
-                      onClick={() => toggleComments(p.elementId)}
-                    >
-                      {showCommentsPosts.includes(p._id)
-                        ? "Nascondi commenti"
-                        : "Mostra commenti"}
-                    </Button>
+                  <Button
+                    variant="link"
+                    onClick={() => toggleComments(p._id)} // usa sempre post._id
+                    className=" d-flex"
+                  >
+                    {showCommentsPosts.includes(p._id)
+                      ? "Nascondi commenti"
+                      : "Mostra commenti"}
+                  </Button>
 
-                    {showCommentsPosts.includes(p._id) && (
-                      <div className="mt-2">
-                        {commentsLoading && (
-                          <Spinner animation="border" size="sm" />
-                        )}
-                        {comments[p._id] ? (
-                          comments[p._id].map((c) => (
-                            <div key={c._id} className="border-top pt-1">
-                              <strong>{c.author}</strong>: {c.comment}
-                            </div>
-                          ))
-                        ) : (
-                          <div className="text-muted">
-                            Nessun commento disponibile
+                  {showCommentsPosts.includes(p._id) && (
+                    <div className="mt-2">
+                      {commentsLoading && (
+                        <Spinner animation="border" size="sm" />
+                      )}
+                      {comments[p._id] && comments[p._id].length > 0 ? (
+                        comments[p._id].map((c) => (
+                          <div key={c._id} className="border-top pt-1">
+                            <strong>{c.author}</strong>: {c.comment}
                           </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                        ))
+                      ) : (
+                        <div className="text-muted">
+                          Nessun commento disponibile
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </Col>
             ))}
       </Row>
       {console.log(comments)}
+      {console.log(post)}
     </Container>
   )
 }

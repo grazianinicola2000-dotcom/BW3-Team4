@@ -8,6 +8,7 @@ import Aside from "./components/Aside"
 import FooterLink from "./componentsCri/FooterLink"
 import { Col, Container, Row } from "react-bootstrap"
 import Posts from "./componentsCri/Posts"
+import CreatePostLink from "./componentsCri/CreatePostLink"
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
             <ConsigliatoPerTe />
             <Analisi />
             <Experience />
-            <FooterLink /> */}
-            <Posts />
+            <FooterLink />
+            <Posts /> */}
+            <CreatePostLink />
           </Col>
           <Col className=" d-none d-lg-block col-4">
             <Aside />
