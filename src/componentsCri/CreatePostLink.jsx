@@ -44,7 +44,7 @@ const CreatePostLink = () => {
             </div>
             <div className=" d-flex justify-content-around mt-4">
               <div
-                className="d-flex align-items-center home-hover rounded-3"
+                className="d-flex flex-column flex-lg-row align-items-center home-hover rounded-3"
                 style={{ cursor: "pointer" }}
               >
                 <PiVideoFill className="fs-3 text-success" />
@@ -53,7 +53,7 @@ const CreatePostLink = () => {
                 </Button>
               </div>
               <div
-                className="d-flex align-items-center home-hover rounded-3"
+                className="d-flex flex-column flex-lg-row align-items-center home-hover rounded-3"
                 style={{ cursor: "pointer" }}
               >
                 <HiMiniPhoto className="fs-3 text-primary" />
@@ -62,7 +62,7 @@ const CreatePostLink = () => {
                 </Button>
               </div>
               <div
-                className="d-flex align-items-center home-hover rounded-3"
+                className="d-flex flex-column flex-lg-row align-items-center home-hover rounded-3"
                 style={{ cursor: "pointer" }}
               >
                 <RiArticleLine className="fs-3 text-danger" />
