@@ -10,6 +10,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import Posts from "./componentsCri/Posts";
 import Jobs from "./ComponentsNG/jobs";
 import { Route, Routes } from "react-router-dom";
+import AsideHomeProfile from "./components/AsideHomeProfile";
+import AsideJobProfile from "./components/AsideJobProfile";
 
 function App() {
   return (
