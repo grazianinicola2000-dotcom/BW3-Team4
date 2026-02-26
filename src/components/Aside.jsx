@@ -10,7 +10,7 @@ const Aside = () => {
 
   const MY_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTlkYjE2YWI1NTgyMDAwMTU4YzM0MzkiLCJpYXQiOjE3NzE5NDI5NTIsImV4cCI6MTc3MzE1MjU1Mn0.fqEAxEzCR84sB0KSCyC2rXD4ncgGAFC_9lip-eG64-o";
   
-  const teamUsernames = ["fabry23", "NicolaG", "Cristian.05__", ".."];
+  const teamUsernames = ["fabry23", "NicolaG", "Cristian.05__"];
 
   useEffect(() => {
     const fetchProfiles = async () => {
