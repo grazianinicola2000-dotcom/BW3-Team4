@@ -21,7 +21,13 @@ const AsideHomeProfile = () => {
   const image = profileDetails?.image || "https://via.placeholder.com/150"
 
   return (
-    <aside className="aside-shared-profile custom-w-rem d-none d-md-block mt-4">
+    <aside
+      className="aside-shared-profile custom-w-rem d-none d-md-block mt-4"
+      style={{
+        position: "sticky",
+        top: "90px", // ora è fixed: Cri
+      }}
+    >
       <div className="card shadow-none border mb-2 rounded-3 overflow-hidden bg-white text-start">
         <div className="profile-header-bg"></div>
         <div className="px-3 pb-3">

@@ -23,13 +23,18 @@ import { AiOutlineLike } from "react-icons/ai"
 import { FaRegCommentDots } from "react-icons/fa"
 import { BiRepost } from "react-icons/bi"
 import { RiShareForwardLine } from "react-icons/ri"
-import { SlOptionsVertical } from "react-icons/sl"
+import { SlOptions } from "react-icons/sl"
 import { IoClose } from "react-icons/io5"
 import { FaRegImage } from "react-icons/fa6"
 import { FaRegCalendarAlt } from "react-icons/fa"
 import { BsFillChatSquareTextFill } from "react-icons/bs"
 import { IoMdAdd } from "react-icons/io"
 import { MdOutlineWatchLater } from "react-icons/md"
+import { FaRegBookmark } from "react-icons/fa6"
+import { FaLink } from "react-icons/fa6"
+import { FaFlag } from "react-icons/fa6"
+import { FiEdit2 } from "react-icons/fi"
+import { MdDeleteForever } from "react-icons/md"
 
 const Posts = () => {
   const dispatch = useDispatch()
@@ -153,9 +158,9 @@ const Posts = () => {
                       />
                       <h5 className=" m-0">{p.user.username || "Unknown"}</h5>
                     </div>
-                    <div className=" d-flex gap-2 position-relative">
+                    <div className=" d-flex gap-3 position-relative">
                       <Button className=" text-primary bg-white border-0 p-0 fw-semibold">
-                        segui +
+                        + segui
                       </Button>{" "}
                       <Button
                         onClick={() =>
@@ -163,7 +168,7 @@ const Posts = () => {
                         }
                         className=" text-secondary bg-white border-0 p-0 fw-semibold"
                       >
-                        <SlOptionsVertical />
+                        <SlOptions />
                       </Button>{" "}
                       {openMenuId === p._id && (
                         <div
@@ -171,25 +176,59 @@ const Posts = () => {
                           style={{
                             zIndex: 10,
                             top: "40px",
+                            left: "-85px",
                           }}
                         >
-                          {p.user.username === profileDetails.username && (
+                          <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                            <FaRegBookmark />
                             <Button
-                              variant="secondary"
-                              className="dropdown-item home-hover rounded p-1 text-center"
-                              onClick={() => handleEditPost(p)}
+                              variant="trasparent"
+                              className="dropdown-item p-1"
                             >
-                              Modifica
+                              Salva
                             </Button>
+                          </div>
+                          <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                            <FaLink />
+                            <Button
+                              variant="trasparent"
+                              className="dropdown-item p-1"
+                            >
+                              Copia link al post
+                            </Button>
+                          </div>
+                          <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                            <FaFlag />
+                            <Button
+                              variant="trasparent"
+                              className="dropdown-item p-1"
+                            >
+                              Segnala post
+                            </Button>
+                          </div>
+                          {p.user.username === profileDetails.username && (
+                            <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                              <FiEdit2 />
+                              <Button
+                                variant="secondary"
+                                className="dropdown-item rounded p-1"
+                                onClick={() => handleEditPost(p)}
+                              >
+                                Modifica
+                              </Button>
+                            </div>
                           )}
                           {p.user.username === profileDetails.username && (
-                            <Button
-                              variant="danger"
-                              className="dropdown-item text-danger home-hover-delete rounded p-1 text-center"
-                              onClick={() => dispatch(deletePost(p._id))}
-                            >
-                              Elimina
-                            </Button>
+                            <div className=" d-flex align-items-center gap-1 text-danger home-hover-delete px-2 rounded">
+                              <MdDeleteForever />
+                              <Button
+                                variant="danger"
+                                className="dropdown-item text-danger home-hover-delete-btn rounded p-1"
+                                onClick={() => dispatch(deletePost(p._id))}
+                              >
+                                Elimina
+                              </Button>
+                            </div>
                           )}
                         </div>
                       )}
