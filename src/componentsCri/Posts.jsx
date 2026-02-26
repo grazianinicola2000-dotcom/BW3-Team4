@@ -35,6 +35,7 @@ import { FaLink } from "react-icons/fa6"
 import { FaFlag } from "react-icons/fa6"
 import { FiEdit2 } from "react-icons/fi"
 import { MdDeleteForever } from "react-icons/md"
+import { FaEarthAmericas } from "react-icons/fa6"
 
 const Posts = () => {
   const dispatch = useDispatch()
@@ -258,7 +259,16 @@ const Posts = () => {
                       </span>
                     )}
                   </p>
-                  <span className=" small">at {p.createdAt.slice(0, 10)}</span>
+                  <span className="small d-flex align-items-center gap-2">
+                    {new Date(p.createdAt).toLocaleString("it-IT", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                    <FaEarthAmericas />
+                  </span>
                   <hr />
                   <section className="d-flex flex-row align-items-center justify-content-around">
                     <div style={{ cursor: "pointer" }}>
