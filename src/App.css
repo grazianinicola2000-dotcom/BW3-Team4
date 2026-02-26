@@ -61,3 +61,8 @@
   border-radius: 10px;
   height: 600px;
 }
+
+.home-hover-delete:hover {
+  background-color: red;
+  color: white !important;
+}
