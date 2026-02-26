@@ -1,4 +1,11 @@
-import { GET_POST, GET_POST_ERROR, GET_POST_LOADING } from "../actions/post"
+import {
+  GET_POST,
+  GET_POST_ERROR,
+  GET_POST_LOADING,
+  CREATE_POST,
+  CREATE_POST_ERROR,
+  CREATE_POST_LOADING,
+} from "../actions/post"
 
 const initialState = {
   postDetails: [],
@@ -9,6 +16,7 @@ const initialState = {
 const postReducer = (currentState = initialState, action) => {
   switch (action.type) {
     case GET_POST_LOADING:
+    case CREATE_POST_LOADING:
       return {
         ...currentState,
         loading: true,
@@ -20,7 +28,14 @@ const postReducer = (currentState = initialState, action) => {
         postDetails: action.payload,
         loading: false,
       }
+    case CREATE_POST:
+      return {
+        ...currentState,
+        loading: false,
+        postDetails: [action.payload, ...currentState.postDetails],
+      }
     case GET_POST_ERROR:
+    case CREATE_POST_ERROR:
       return {
         ...currentState,
         error: true,

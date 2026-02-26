@@ -56,3 +56,8 @@
 .home-hover:hover {
   background-color: rgb(240, 240, 240);
 }
+
+.custom-modal .modal-content {
+  border-radius: 10px;
+  height: 600px;
+}

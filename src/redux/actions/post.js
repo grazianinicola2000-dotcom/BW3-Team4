@@ -4,6 +4,9 @@ export const GET_POST_LOADING = "GET_POST_LOADING"
 export const GET_COMMENTS = "GET_COMMENTS"
 export const GET_COMMENTS_ERROR = "GET_COMMENTS_ERROR"
 export const GET_COMMENTS_LOADING = "GET_COMMENTS_LOADING"
+export const CREATE_POST = "CREATE_POST"
+export const CREATE_POST_ERROR = "CREATE_POST_ERROR"
+export const CREATE_POST_LOADING = "CREATE_POST_LOADING"
 
 export const getPost = function () {
   return async (dispatch) => {
@@ -70,6 +73,42 @@ export const getComments = function () {
       }
     } catch (error) {
       dispatch({ type: GET_COMMENTS_ERROR })
+      console.error(error)
+    }
+  }
+}
+
+export const createPost = function (postBody) {
+  return async (dispatch) => {
+    dispatch({ type: CREATE_POST_LOADING })
+
+    const postEndpoint = "https://striveschool-api.herokuapp.com/api/posts"
+
+    const authorizationNG =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM"
+
+    try {
+      const response = await fetch(postEndpoint, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authorizationNG}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postBody),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+
+        dispatch({
+          type: CREATE_POST,
+          payload: data,
+        })
+      } else {
+        dispatch({ type: CREATE_POST_ERROR })
+      }
+    } catch (error) {
+      dispatch({ type: CREATE_POST_ERROR })
       console.error(error)
     }
   }
