@@ -1,4 +1,9 @@
-.nav-hover:hover {
+.nav-hover {
+  opacity: 0.7;
+}
+
+.nav-hover.active {
+  opacity: 1;
   border-bottom: 2px solid black;
 }
 
@@ -46,4 +51,13 @@
   border-top: 4px solid;
   border-right: 4px solid transparent;
   border-left: 4px solid transparent;
+}
+
+.home-hover:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.custom-modal .modal-content {
+  border-radius: 10px;
+  height: 600px;
 }
