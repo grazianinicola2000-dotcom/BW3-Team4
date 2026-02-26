@@ -127,29 +127,29 @@ const Posts = () => {
                   <span className=" small">at {p.createdAt.slice(0, 10)}</span>
                   <hr />
                   <section className="d-flex flex-row align-items-center justify-content-around">
-                    <div style={{ cursor: "pointer" }}>
-                      <Button className="d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
+                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
+                      <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <AiOutlineLike className="fs-5" />
                         Consiglia
                       </Button>
                     </div>
-                    <div style={{ cursor: "pointer" }}>
+                    <div className="home-hover rounded w-25 d-flex justify-content-center " style={{ cursor: "pointer" }}>
                       <Button
                         onClick={() => toggleComments(p._id)}
-                        className="d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2"
+                        className="d-flex flex-column align-items-center bg-transparent text-black border-0 rounded fw-semibold px-2"
                       >
                         <FaRegCommentDots className="fs-5" />
                         Commenta
                       </Button>
                     </div>
-                    <div style={{ cursor: "pointer" }}>
-                      <Button className="d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
+                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
+                      <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <BiRepost className="fs-5" />
                         Diffondi il post
                       </Button>
                     </div>
-                    <div style={{ cursor: "pointer" }}>
-                      <Button className="d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
+                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
+                      <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <RiShareForwardLine className="fs-5" />
                         Invia
                       </Button>
