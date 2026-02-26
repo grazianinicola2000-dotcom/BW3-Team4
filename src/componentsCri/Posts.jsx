@@ -71,7 +71,7 @@ const Posts = () => {
   }, []);
 
   return (
-    <Container className=" mt-3">
+    <Container className=" mt-3 px-0">
       <Row className="justify-content-center">
         {loading && (
           <Spinner className="spinner" animation="border" role="status">

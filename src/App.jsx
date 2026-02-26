@@ -1,18 +1,19 @@
-import "./App.css";
-import NavBarLink from "./componentsCri/NavBarLink";
-import ProfileMainDetails from "./ComponentsNG/ProfileMainDetails";
-import ConsigliatoPerTe from "./components/ConsigliatoPerTe";
-import Analisi from "./components/Analisi";
-import Experience from "./components/Experience";
-import Aside from "./components/Aside";
-import FooterLink from "./componentsCri/FooterLink";
-import { Col, Container, Row } from "react-bootstrap";
-import Posts from "./componentsCri/Posts";
-import Jobs from "./ComponentsNG/jobs";
-import { Route, Routes } from "react-router-dom";
-import AsideHomeProfile from "./components/AsideHomeProfile";
-import AsideJobProfile from "./components/AsideJobProfile";
-import AsideHome from "./components/AsideHome";
+import "./App.css"
+import NavBarLink from "./componentsCri/NavBarLink"
+import ProfileMainDetails from "./ComponentsNG/ProfileMainDetails"
+import ConsigliatoPerTe from "./components/ConsigliatoPerTe"
+import Analisi from "./components/Analisi"
+import Experience from "./components/Experience"
+import Aside from "./components/Aside"
+import FooterLink from "./componentsCri/FooterLink"
+import { Col, Container, Row } from "react-bootstrap"
+import Posts from "./componentsCri/Posts"
+import Jobs from "./ComponentsNG/jobs"
+import { Route, Routes } from "react-router-dom"
+import AsideHomeProfile from "./components/AsideHomeProfile"
+import AsideJobProfile from "./components/AsideJobProfile"
+import AsideHome from "./components/AsideHome"
+import CreatePostLink from "./componentsCri/CreatePostLink"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                   <AsideHomeProfile />
                 </Col>
                 <Col xs={12} lg={7}>
+                  <CreatePostLink />
                   <Posts />
                 </Col>
                 <Col className="d-none d-lg-block" lg={3}>
@@ -75,7 +77,7 @@ function App() {
         />
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
