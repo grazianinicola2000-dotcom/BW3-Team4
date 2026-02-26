@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPost, getComments, addComment } from "../redux/actions/post";
+import { getPost, getComments, addComment, deleteComment } from "../redux/actions/post";
 import { Alert, Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
@@ -10,12 +10,24 @@ import { RiShareForwardLine } from "react-icons/ri";
 
 const Posts = () => {
   const dispatch = useDispatch();
-  // const [toggleCommentsSection, settoggleCommentsSection] = useState(false);
 
   const profileDetails = useSelector((currentState) => {
     return currentState.profile.profileDetails;
   });
 
+  const formatDate = (date) => {
+    if (!date) return "";
+
+    const formatted = new Date(date).toLocaleDateString("it-IT", {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+  };
   // POST
 
   const post = useSelector((currentState) => {
@@ -38,11 +50,6 @@ const Posts = () => {
   const [newComments, setNewComments] = useState({});
 
   const toggleComments = (postId) => {
-    // if (toggleCommentsSection === true) {
-    //   settoggleCommentsSection(false);
-    // } else {
-    //   settoggleCommentsSection(true);
-    // }
     if (!comments[postId]) {
       dispatch(getComments(postId));
     }
@@ -150,7 +157,7 @@ const Posts = () => {
                   </section>
                   {showCommentsPosts.includes(p._id) && (
                     <div className="comments-panel mt-3">
-                      <div className="d-flex gap-2 align-items-center mb-2">
+                      <div className="d-flex gap-2 align-items-center mb-4">
                         <img src={profileDetails.image} className="rounded-circle" width="30" />
                         <input
                           onKeyDown={(e) => {
@@ -176,8 +183,25 @@ const Posts = () => {
 
                         {comments[p._id]?.length > 0 ? (
                           comments[p._id].map((c) => (
-                            <div key={c._id}>
-                              <strong>{c.author}</strong>: {c.comment}
+                            <div className="mb-4" key={c._id}>
+                              <div className="d-flex justify-content-between align-items-baseline">
+                                <h5 className="m-0">
+                                  {c.author}
+                                  {console.log(c)}
+                                </h5>
+                                <div className="d-flex align-items-center gap-3">
+                                  <p className="text-secondary m-0" style={{ fontSize: "10px" }}>
+                                    {formatDate(c.updatedAt)}
+                                  </p>
+                                  <i class="bi bi-three-dots"></i>
+                                </div>
+                              </div>
+                              <p className="m-0 ps-3">{c.comment}</p>
+                              {c.author === profileDetails.username && (
+                                <p style={{ fontSize: "10px" }} onClick={() => dispatch(deleteComment(c._id, p._id))}>
+                                  Elimina
+                                </p>
+                              )}
                             </div>
                           ))
                         ) : (

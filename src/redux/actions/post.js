@@ -5,6 +5,7 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const GET_COMMENTS_ERROR = "GET_COMMENTS_ERROR";
 export const GET_COMMENTS_LOADING = "GET_COMMENTS_LOADING";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export const getPost = function () {
   return async (dispatch) => {
@@ -105,6 +106,33 @@ export const addComment = (postId, commentText) => {
       dispatch({
         type: ADD_COMMENT,
         payload: data,
+        postId,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const deleteComment = (commentId, postId) => {
+  return async (dispatch) => {
+    const endpoint = `https://striveschool-api.herokuapp.com/api/comments/${commentId}`;
+    const authorizationNG =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${authorizationNG}`,
+        },
+      });
+
+      if (!response.ok) throw new Error();
+
+      dispatch({
+        type: DELETE_COMMENT,
+        commentId,
         postId,
       });
     } catch (error) {

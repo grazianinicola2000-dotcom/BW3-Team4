@@ -1,4 +1,4 @@
-import { ADD_COMMENT, GET_COMMENTS, GET_COMMENTS_ERROR, GET_COMMENTS_LOADING } from "../actions/post";
+import { ADD_COMMENT, DELETE_COMMENT, GET_COMMENTS, GET_COMMENTS_ERROR, GET_COMMENTS_LOADING } from "../actions/post";
 
 const initialState = {
   comments: {},
@@ -34,6 +34,14 @@ const commentsReducer = (currentState = initialState, action) => {
         comments: {
           ...currentState.comments,
           [action.postId]: [...(currentState.comments[action.postId] || []), action.payload],
+        },
+      };
+    case DELETE_COMMENT:
+      return {
+        ...currentState,
+        comments: {
+          ...currentState.comments,
+          [action.postId]: currentState.comments[action.postId].filter((c) => c._id !== action.commentId),
         },
       };
     default:
