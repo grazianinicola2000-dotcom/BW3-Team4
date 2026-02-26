@@ -154,7 +154,7 @@ const Posts = () => {
                           width: "30px",
                           height: "30px",
                           borderRadius: "100%",
-                          objectFit: "contain",
+                          objectFit: "cover",
                         }}
                       />
                       <h5 className=" m-0">{p.user.username || "Unknown"}</h5>
