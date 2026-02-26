@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfile, openContactInfoModal } from "../redux/actions";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import "./ProfileMainDetails.css";
 import { openProfileEditForm } from "../redux/actions";
 import ProfileEditForm from "./ProfileEditForm";
 import ContactInfoModal from "./ContactInfoModal";
+import "./ProfileMainDetails.css";
 
 const ProfileMainDetails = () => {
   const dispatch = useDispatch();
