@@ -1,7 +1,7 @@
-import { Col, Container, Row } from "react-bootstrap"
-import { BsFillQuestionCircleFill } from "react-icons/bs"
-import { IoMdSettings } from "react-icons/io"
-import { IoShieldHalf } from "react-icons/io5"
+import { Col, Container, Row } from "react-bootstrap";
+import { BsFillQuestionCircleFill } from "react-icons/bs";
+import { IoMdSettings } from "react-icons/io";
+import { IoShieldHalf } from "react-icons/io5";
 
 const FooterLink = () => {
   return (
@@ -89,10 +89,7 @@ const FooterLink = () => {
               <BsFillQuestionCircleFill className=" mb-3 fs-5 text-secondary" />
               <div>
                 <h6 className=" text-secondary m-0">Domande?</h6>
-                <a
-                  href="#"
-                  className=" text-decoration-none text-black nav-hover"
-                >
+                <a href="#" className=" text-decoration-none text-black nav-hover">
                   Visita il nostro Centro assistenza
                 </a>
               </div>
@@ -100,13 +97,8 @@ const FooterLink = () => {
             <li className="d-flex align-items-center gap-2">
               <IoMdSettings className=" mb-3 fs-5 text-secondary" />
               <div>
-                <h6 className=" text-secondary m-0">
-                  Gestisci il tuo account e la tua privacy
-                </h6>
-                <a
-                  href="#"
-                  className=" text-decoration-none text-black nav-hover"
-                >
+                <h6 className=" text-secondary m-0">Gestisci il tuo account e la tua privacy</h6>
+                <a href="#" className=" text-decoration-none text-black nav-hover">
                   Vai alle impostazioni
                 </a>
               </div>
@@ -114,13 +106,8 @@ const FooterLink = () => {
             <li className="d-flex align-items-center gap-2">
               <IoShieldHalf className=" mb-3 fs-5 text-secondary" />
               <div>
-                <h6 className=" text-secondary m-0">
-                  Trasparenza sui contenuti consigliati
-                </h6>
-                <a
-                  href="#"
-                  className=" text-decoration-none text-black nav-hover"
-                >
+                <h6 className=" text-secondary m-0">Trasparenza sui contenuti consigliati</h6>
+                <a href="#" className=" text-decoration-none text-black nav-hover">
                   Scopri di più sui contenuti consigliati.
                 </a>
               </div>
@@ -130,11 +117,7 @@ const FooterLink = () => {
             <label htmlFor="lingua" className=" text-muted mb-1 small">
               Seleziona lingua
             </label>
-            <select
-              id="lingua"
-              name="lingua"
-              className=" d-block border border-black rounded-1 w-50 p-1"
-            >
+            <select id="lingua" name="lingua" className=" d-block border border-black rounded-1 w-50 p-1">
               <option value="">italiano</option>
               <option value="linkedin">inglese</option>
               <option value="google">spagnolo</option>
@@ -143,7 +126,7 @@ const FooterLink = () => {
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default FooterLink
+export default FooterLink;

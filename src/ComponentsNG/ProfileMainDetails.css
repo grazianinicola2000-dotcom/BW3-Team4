@@ -41,7 +41,7 @@
 #editBtnContainer {
   position: absolute;
   top: 20px;
-  right: 40px;
+  right: 30px;
   width: 35px;
   height: 35px;
   display: flex;
@@ -55,4 +55,9 @@
 
 .custom-rounded {
   border-radius: 0.625rem !important;
+}
+
+#contactInfoBtn:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

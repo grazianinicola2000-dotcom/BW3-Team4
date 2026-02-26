@@ -9,18 +9,20 @@ import { HiChatAlt } from "react-icons/hi"
 import { IoIosNotifications } from "react-icons/io"
 import { TfiLayoutGrid3Alt } from "react-icons/tfi"
 import { MdRequestPage } from "react-icons/md"
-import { Button, Col, Row } from "react-bootstrap"
+import { Button, Col, Form, Row } from "react-bootstrap"
 import { IoMdCompass } from "react-icons/io"
 import { MdGroups } from "react-icons/md"
 import { FaChalkboard } from "react-icons/fa"
 import { VscGraph } from "react-icons/vsc"
 import { FaInfoCircle } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
-import { getProfile } from "../redux/actions"
-import { useEffect } from "react"
+import { getJobs, getProfile, setSearchInput } from "../redux/actions"
+import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 
 function NavBarLink() {
+  const [query, setQuery] = useState("")
   const profileDetails = useSelector((currentState) => {
     return currentState.profile.profileDetails
   })
@@ -30,6 +32,29 @@ function NavBarLink() {
   })
 
   const dispatch = useDispatch()
+
+  const searched = useSelector((currentState) => {
+    return currentState.searched.searched
+  })
+
+  const handleChange = (e) => {
+    setQuery(e.target.value)
+  }
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    dispatch(setSearchInput(query))
+
+    navigate(`/jobs`)
+  }
+
+  useEffect(() => {
+    if (searched) {
+      dispatch(getJobs(searched))
+    }
+  }, [searched])
 
   useEffect(() => {
     dispatch(getProfile())
@@ -60,12 +85,16 @@ function NavBarLink() {
 
           <div className="d-flex align-items-center rounded-5 border border-secondary ps-3 pe-5 py-1">
             <IoSearch className=" fs-5 me-2" />
-            <input
-              type="text"
-              placeholder="Cerca"
-              className="border-0 py-1"
-              style={{ outline: "none" }}
-            />
+            <Form onSubmit={handleSubmit}>
+              <Form.Control
+                value={query}
+                onChange={handleChange}
+                type="search"
+                placeholder="Cerca"
+                className="py-1 border-0 shadow-none"
+                style={{ outline: "none", boxShadow: "none" }}
+              />
+            </Form>
           </div>
         </div>
 
@@ -170,7 +199,7 @@ function NavBarLink() {
                   <div className=" d-flex justify-content-center gap-1 my-3">
                     <Button
                       as={NavLink}
-                      to="/profile"
+                      to={`/profile/${profileDetails?._id}`}
                       className=" bg-light text-primary text-start rounded-5 fw-semibold"
                     >
                       Visualizza profilo

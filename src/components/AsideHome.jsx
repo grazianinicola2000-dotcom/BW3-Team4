@@ -36,17 +36,14 @@ const AsideHome = () => {
   ];
 
   return (
-    <aside className="aside-container ms-3" style={{ width: "320px" }}>
+    <aside className="aside-container mt-4 ms-3">
       <div className="card shadow-none border-1 mb-2 custom-rounded-aside">
         <div className="card-body p-3">
           <div className="d-flex justify-content-between align-items-center mb-2">
             <h6 className="fw-bold mb-0" style={{ fontSize: "16px" }}>
               LinkedIn Notizie
             </h6>
-            <BsInfoSquareFill
-              className="text-secondary"
-              style={{ fontSize: "12px" }}
-            />
+            <BsInfoSquareFill className="text-secondary" style={{ fontSize: "12px" }} />
           </div>
 
           <p className="text-secondary fw-bold small mb-3">Storie principali</p>
@@ -54,16 +51,10 @@ const AsideHome = () => {
           <ul className="list-unstyled mb-2">
             {notizie.map((news) => (
               <li key={news.id} className="mb-3 news-item cursor-pointer">
-                <div
-                  className="fw-bold text-dark d-block text-truncate"
-                  style={{ fontSize: "14px" }}
-                >
+                <div className="fw-bold text-dark d-block text-truncate" style={{ fontSize: "14px" }}>
                   • {news.titolo}
                 </div>
-                <div
-                  className="text-secondary ps-3"
-                  style={{ fontSize: "12px" }}
-                >
+                <div className="text-secondary ps-3" style={{ fontSize: "12px" }}>
                   {news.tempo} • {news.lettori}
                 </div>
               </li>
@@ -77,51 +68,29 @@ const AsideHome = () => {
       </div>
 
       <div className="card shadow-none border-1 overflow-hidden custom-rounded-aside mb-3">
-        <img
-          src="https://media.licdn.com/media/AAYAAQTPAAgAAQAAAAAAADBJg6kiYYJxTUOBq1MuLPcNcQ.png"
-          className="card-img-top"
-          alt="LinkedIn Learning"
-        />
+        <img src="https://media.licdn.com/media/AAYAAQTPAAgAAQAAAAAAADBJg6kiYYJxTUOBq1MuLPcNcQ.png" className="card-img-top" alt="LinkedIn Learning" />
       </div>
 
       <div className="px-4 text-center">
-        <div
-          className="d-flex flex-wrap justify-content-center gap-2 mb-2"
-          style={{ fontSize: "12px" }}
-        >
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-2" style={{ fontSize: "12px" }}>
           <span className="text-secondary">Informazioni</span>
           <span className="text-secondary">Accessibilità</span>
           <span className="text-secondary">Centro assistenza</span>
         </div>
-        <div
-          className="d-flex flex-wrap justify-content-center gap-2 mb-2"
-          style={{ fontSize: "12px" }}
-        >
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-2" style={{ fontSize: "12px" }}>
           <span className="text-secondary">Privacy e condizioni</span>
-          <span className="text-secondary">
-            Opzioni per gli annunci pubblicitari
-          </span>
+          <span className="text-secondary">Opzioni per gli annunci pubblicitari</span>
         </div>
-        <div
-          className="d-flex flex-wrap justify-content-center gap-2 mb-2"
-          style={{ fontSize: "12px" }}
-        >
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-2" style={{ fontSize: "12px" }}>
           <span className="text-secondary">Pubblicità</span>
           <span className="text-secondary">Servizi alle aziende</span>
         </div>
-        <div
-          className="d-flex flex-wrap justify-content-center gap-2 mb-3"
-          style={{ fontSize: "12px" }}
-        >
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-3" style={{ fontSize: "12px" }}>
           <span className="text-secondary">Scarica l'app LinkedIn</span>
           <span className="text-secondary">Altro</span>
         </div>
         <div className="d-flex align-items-center justify-content-center gap-2 pb-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/a/aa/LinkedIn_2021.svg"
-            alt="LinkedIn Logo"
-            width="58"
-          />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/LinkedIn_2021.svg" alt="LinkedIn Logo" width="58" />
           <span className="text-dark small">LinkedIn Corporation © 2026</span>
         </div>
       </div>

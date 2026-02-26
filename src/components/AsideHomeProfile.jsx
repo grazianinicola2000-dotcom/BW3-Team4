@@ -21,7 +21,7 @@ const AsideHomeProfile = () => {
   const image = profileDetails?.image || "https://via.placeholder.com/150";
 
   return (
-    <aside className="aside-shared-profile custom-w-rem d-none d-md-block">
+    <aside className="aside-shared-profile custom-w-rem d-none d-md-block mt-4">
       <div className="card shadow-none border mb-2 rounded-3 overflow-hidden bg-white text-start">
         <div className="profile-header-bg"></div>
         <div className="px-3 pb-3">
@@ -29,9 +29,7 @@ const AsideHomeProfile = () => {
             <img src={image} alt="Profilo" className="rounded-circle border border-2 border-white bg-white" />
           </div>
           <div className="pt-2">
-            <h6 className="fs-5 mb-0 text-dark cursor-pointer">
-              {loading ? "Caricamento..." : `${name} ${surname}`}
-            </h6>
+            <h6 className="fs-5 mb-0 text-dark cursor-pointer">{loading ? "Caricamento..." : `${name} ${surname}`}</h6>
             <p className="text-secondary mb-1 small-text">{loading ? "..." : title}</p>
             <p className="text-secondary x-small-text mb-2">Italia</p>
           </div>
@@ -78,8 +76,6 @@ const AsideHomeProfile = () => {
           <span className="fw-bold text-dark x-small-text">Eventi</span>
         </div>
       </div>
-
-      
     </aside>
   );
 };
