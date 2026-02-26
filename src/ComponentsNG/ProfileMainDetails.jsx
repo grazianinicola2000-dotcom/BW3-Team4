@@ -38,7 +38,7 @@ const ProfileMainDetails = () => {
               <img src={profileDetails.image} className="rounded-circle border border-5 border-light" alt="profile_img" />
             )}
           </div>
-          {!userId && (
+          {userId && (
             <div id="porfileSectionCamerabutton" className="m-0 bg-light rounded-circle">
               <i className="m-0 bi bi-camera-fill text-primary"></i>
             </div>
@@ -87,7 +87,7 @@ const ProfileMainDetails = () => {
             Enhance profile
           </Button>
         </div>
-        {!userId && (
+        {userId && (
           <div
             onClick={() => {
               dispatch(openProfileEditForm());
