@@ -1,7 +1,8 @@
-import { GET_PROFILE, GET_PROFILE_ERROR, GET_PROFILE_LOADING, EDIT_PROFILE } from "../actions";
+import { GET_PROFILE, GET_MY_PROFILE, GET_PROFILE_ERROR, GET_PROFILE_LOADING, EDIT_PROFILE } from "../actions";
 
 const initialState = {
   profileDetails: null,
+  myProfile: null,      
   error: false,
   loading: false,
 };
@@ -20,10 +21,17 @@ const profileReducer = (currentState = initialState, action) => {
         profileDetails: action.payload,
         loading: false,
       };
+    case GET_MY_PROFILE:
+      return {
+        ...currentState,
+        myProfile: action.payload,
+        loading: false,
+      };
     case GET_PROFILE_ERROR:
       return {
         ...currentState,
         error: true,
+        loading: false,
       };
     case EDIT_PROFILE:
       return {
@@ -32,6 +40,10 @@ const profileReducer = (currentState = initialState, action) => {
           ...currentState.profileDetails,
           ...action.payload,
         },
+        myProfile: {
+          ...currentState.myProfile,
+          ...action.payload,
+        }
       };
     default:
       return currentState;

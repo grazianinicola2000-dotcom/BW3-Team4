@@ -28,7 +28,7 @@ const ProfileMainDetails = () => {
     <section className=" overflow-hidden bg-white border border-secondary-subtle custom-rounded mt-4 mb-2">
       <Row>
         <Col xs={12} id="profileSection">
-          <img className="profile-details-bg w-100" src="/profile_bg.png" alt="profile_bg_img" />
+          <img className="profile-details-bg w-100" src="/public/imgCopertina.png" alt="profile_bg_img" />
           <div id="profileImg">
             {loading || !profileDetails ? (
               <Spinner className="spinner" animation="border" role="status">
@@ -95,7 +95,7 @@ const ProfileMainDetails = () => {
             id="editBtnContainer"
             className="m-0 rounded-circle"
           >
-            <i id="editBtn" className="bi bi-pencil"></i>
+            <i id="editBtn" className="bi bi-pencil fs-5"></i>
           </div>
         )}
       </section>

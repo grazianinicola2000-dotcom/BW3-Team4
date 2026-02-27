@@ -9,16 +9,23 @@ const AsideHomeProfile = () => {
   const { userId } = useParams()
 
   const profileDetails = useSelector((state) => state.profile.profileDetails)
+  const myProfile = useSelector((state) => state.profile.myProfile)
   const loading = useSelector((state) => state.profile.loading)
 
   useEffect(() => {
-    dispatch(getProfile(userId))
-  }, [userId, dispatch])
+    if (userId) {
+      dispatch(getProfile(userId))
+    } else if (!myProfile) {
+      dispatch(getProfile())
+    }
+  }, [userId, dispatch, myProfile])
 
-  const name = profileDetails?.name || "Utente"
-  const surname = profileDetails?.surname || ""
-  const title = profileDetails?.title || "Nessun titolo specificato"
-  const image = profileDetails?.image || "https://via.placeholder.com/150"
+  const profile = profileDetails || myProfile
+
+  const name = profile?.name || "Utente"
+  const surname = profile?.surname || ""
+  const title = profile?.title || "Nessun titolo specificato"
+  const image = profile?.image || "https://via.placeholder.com/150"
 
   return (
     <aside
@@ -29,7 +36,7 @@ const AsideHomeProfile = () => {
       }}
     >
       <div className="card shadow-none border mb-2 rounded-3 overflow-hidden bg-white text-start">
-        <div className="profile-header-bg"></div>
+        <img src="/public/imgCopertina.png" alt="" />
         <div className="px-3 pb-3">
           <div className="profile-img-container">
             <img
