@@ -4,7 +4,7 @@ import { HiMiniPhoto } from "react-icons/hi2"
 import { RiArticleLine } from "react-icons/ri"
 import { useDispatch, useSelector } from "react-redux"
 import { getProfile } from "../redux/actions"
-import { createPost } from "../redux/actions/post"
+import { createPost, getPost } from "../redux/actions/post"
 import { useEffect, useState, useRef } from "react"
 import { IoClose } from "react-icons/io5"
 import { FaRegImage } from "react-icons/fa6"
@@ -30,14 +30,16 @@ const CreatePostLink = () => {
     dispatch(getProfile())
   }, [dispatch])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!postText.trim() && !imageFile) return
 
-    dispatch(createPost({ text: postText }, imageFile))
+    await dispatch(createPost({ text: postText }, imageFile))
 
     setPostText("")
     setImageFile(null)
     setShowModal(false)
+
+    dispatch(getPost())
   }
 
   return (

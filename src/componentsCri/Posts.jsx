@@ -217,7 +217,7 @@ const Posts = () => {
                       </span>
                     )}
                   </p>
-                  <img src={p.image} alt="image" className=" d-block mb-3" />
+                  {p.image && <img src={p.image} alt="image" className=" d-block mb-3" />}
                   <span className="small d-flex align-items-center gap-2">
                     {new Date(p.createdAt).toLocaleString("it-IT", {
                       day: "2-digit",
