@@ -85,6 +85,7 @@ const Posts = () => {
   };
 
   const [openMenuId, setOpenMenuId] = useState(null);
+  const [openCommentId, setOpenCommentId] = useState(null);
 
   const [editingPost, setEditingPost] = useState(null);
   const [updatedData, setUpdatedData] = useState({ text: "" });
@@ -293,7 +294,7 @@ const Posts = () => {
                             console.log("AUTHOR:", c.author);
                             console.log("PROFILE FROM MAP:", profiles[c.author]);
                             return (
-                              <div className="mb-4" key={c._id}>
+                              <div className="mb-4 position-relative" key={c._id}>
                                 <div className="d-flex justify-content-between align-items-center m-0">
                                   <div className="d-flex gap-2">
                                     {profiles[c.author]?.image ? (
@@ -316,7 +317,7 @@ const Posts = () => {
                                       {formatDate(c.updatedAt)}
                                     </p>
                                     <Button
-                                      onClick={() => setOpenMenuId(openMenuId === p._id ? null : p._id)}
+                                      onClick={() => setOpenCommentId(openCommentId === c._id ? null : c._id)}
                                       className=" text-secondary bg-white border-0 p-0 fw-semibold"
                                     >
                                       <SlOptions />
@@ -324,10 +325,46 @@ const Posts = () => {
                                   </div>
                                 </div>
                                 <p className="m-0 ps-5 pt-0">{c.comment}</p>
-                                {c.author === profileDetails?.username && (
-                                  <p style={{ fontSize: "10px" }} onClick={() => dispatch(deleteComment(c._id, p._id))}>
-                                    Elimina
-                                  </p>
+                                {openCommentId === c._id && (
+                                  <div
+                                    className="position-absolute  bg-white shadow rounded p-2 d-flex flex-column gap-2"
+                                    style={{
+                                      zIndex: 10,
+                                      top: "40px",
+                                      right: "0",
+                                    }}
+                                  >
+                                    <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                                      <FaRegBookmark />
+                                      <Button variant="trasparent" className="dropdown-item p-1">
+                                        Salva
+                                      </Button>
+                                    </div>
+                                    <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                                      <FaLink />
+                                      <Button variant="trasparent" className="dropdown-item p-1">
+                                        Copia link al post
+                                      </Button>
+                                    </div>
+                                    <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                                      <FaFlag />
+                                      <Button variant="trasparent" className="dropdown-item p-1">
+                                        Segnala post
+                                      </Button>
+                                    </div>
+                                    {c.author === profileDetails?.username && (
+                                      <div className=" d-flex align-items-center gap-1 text-danger home-hover-delete px-2 rounded">
+                                        <MdDeleteForever />
+                                        <Button
+                                          variant="danger"
+                                          className="dropdown-item text-danger home-hover-delete-btn rounded p-1"
+                                          onClick={() => dispatch(deleteComment(c._id, p._id))}
+                                        >
+                                          Elimina
+                                        </Button>
+                                      </div>
+                                    )}
+                                  </div>
                                 )}
                               </div>
                             );
