@@ -21,7 +21,9 @@ const ProfileMainDetails = () => {
   });
 
   useEffect(() => {
-    dispatch(getProfile(userId));
+    if (userId) {
+      dispatch(getProfile(userId));
+    }
   }, [userId]);
 
   return (

@@ -1,4 +1,4 @@
-import { GET_MY_PROFILE, GET_PROFILE_ERROR, GET_PROFILE_LOADING, EDIT_PROFILE, GET_ALL_PROFILES } from "../actions";
+import { GET_MY_PROFILE, GET_PROFILE_ERROR, GET_PROFILE_LOADING, EDIT_PROFILE, GET_ALL_PROFILES, GET_PROFILE } from "../actions";
 
 const initialState = {
   profileDetails: null,
@@ -34,6 +34,12 @@ const profileReducer = (currentState = initialState, action) => {
         profiles: profilesMap,
       };
     }
+    case GET_PROFILE:
+      return {
+        ...currentState,
+        profileDetails: action.payload,
+        loading: false,
+      };
     case GET_MY_PROFILE:
       return {
         ...currentState,
