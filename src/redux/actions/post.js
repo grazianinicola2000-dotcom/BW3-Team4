@@ -85,7 +85,7 @@ export const getComments = function (postId) {
   }
 }
 
-export const createPost = function (postBody) {
+export const createPost = function (postBody, imageFile) {
   return async (dispatch) => {
     dispatch({ type: CREATE_POST_LOADING })
 
@@ -104,19 +104,41 @@ export const createPost = function (postBody) {
         body: JSON.stringify(postBody),
       })
 
-      if (response.ok) {
-        const data = await response.json()
+      if (!response.ok) throw new Error("Errore creazione post")
+
+      const newPost = await response.json()
+
+      if (imageFile) {
+        const formData = new FormData()
+        formData.append("post", imageFile)
+
+        const imageResponse = await fetch(`${postEndpoint}/${newPost._id}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${authorizationNG}`,
+          },
+          body: formData,
+        })
+
+        if (!imageResponse.ok) {
+          throw new Error("Errore upload immagine")
+        }
+
+        const updatedPost = await imageResponse.json()
 
         dispatch({
           type: CREATE_POST,
-          payload: data,
+          payload: updatedPost,
         })
       } else {
-        dispatch({ type: CREATE_POST_ERROR })
+        dispatch({
+          type: CREATE_POST,
+          payload: newPost,
+        })
       }
     } catch (error) {
-      dispatch({ type: CREATE_POST_ERROR })
       console.error(error)
+      dispatch({ type: CREATE_POST_ERROR })
     }
   }
 }

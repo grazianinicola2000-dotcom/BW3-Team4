@@ -298,7 +298,7 @@ function NavBarLink() {
             >
               <Container
                 style={{
-                  width: "700px",
+                  width: "750px",
                   maxHeight: "500px",
                   overflowY: "auto",
                 }}
