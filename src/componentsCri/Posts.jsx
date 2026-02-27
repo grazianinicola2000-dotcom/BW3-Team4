@@ -1,12 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPost, getComments, addComment, deleteComment } from "../redux/actions/post";
-import { Alert, Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import { getPost, getComments, addComment, deleteComment, editPost, deletePost } from "../redux/actions/post";
+import { Alert, Button, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegCommentDots } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { RiShareForwardLine } from "react-icons/ri";
+import { SlOptions } from "react-icons/sl";
+import { IoClose } from "react-icons/io5";
+import { FaRegImage } from "react-icons/fa6";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { BsFillChatSquareTextFill } from "react-icons/bs";
+import { IoMdAdd } from "react-icons/io";
+import { MdOutlineWatchLater } from "react-icons/md";
+import { FaRegBookmark } from "react-icons/fa6";
+import { FaLink } from "react-icons/fa6";
+import { FaFlag } from "react-icons/fa6";
+import { FiEdit2 } from "react-icons/fi";
+import { MdDeleteForever } from "react-icons/md";
+import { FaEarthAmericas } from "react-icons/fa6";
 import { getAllProfiles } from "../redux/actions";
 
 const Posts = () => {
@@ -71,6 +84,20 @@ const Posts = () => {
     setExpandedPosts((prev) => (prev.includes(id) ? prev.filter((postId) => postId !== id) : [...prev, id]));
   };
 
+  const [openMenuId, setOpenMenuId] = useState(null);
+
+  const [editingPost, setEditingPost] = useState(null);
+  const [updatedData, setUpdatedData] = useState({ text: "" });
+
+  const handleEditPost = (post) => {
+    setEditingPost(post);
+    setUpdatedData({ text: post.text || "" });
+    setOpenMenuId(null);
+    setShowModal(true);
+  };
+
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     dispatch(getPost());
   }, []);
@@ -102,19 +129,75 @@ const Posts = () => {
             .map((p, index) => (
               <Col key={p._id || index} className=" col-12">
                 <div className=" d-flex flex-column p-3 border border rounded bg-white my-2">
-                  <div className=" d-flex gap-2 align-items-center mb-3">
-                    <img
-                      src={p.user.image}
-                      alt="profile"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "100%",
-                        objectFit: "contain",
-                      }}
-                    />
-                    <h5 className=" m-0">{p.user.username || "Unknown"}</h5>
-                    <Button className=" text-primary bg-white border-0 p-0 fw-semibold flex-grow-1 text-end">segui +</Button>{" "}
+                  <div className=" d-flex align-items-center mb-3 justify-content-between">
+                    <div className=" d-flex gap-2">
+                      <img
+                        src={p.user.image}
+                        alt="profile"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                      <h5 className=" m-0">{p.user.username || "Unknown"}</h5>
+                    </div>
+                    <div className=" d-flex gap-3 position-relative">
+                      <Button className=" text-primary bg-white border-0 p-0 fw-semibold">+ segui</Button>{" "}
+                      <Button onClick={() => setOpenMenuId(openMenuId === p._id ? null : p._id)} className=" text-secondary bg-white border-0 p-0 fw-semibold">
+                        <SlOptions />
+                      </Button>{" "}
+                      {openMenuId === p._id && (
+                        <div
+                          className="position-absolute bg-white shadow rounded p-2 d-flex flex-column gap-2"
+                          style={{
+                            zIndex: 10,
+                            top: "40px",
+                            left: "-85px",
+                          }}
+                        >
+                          <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                            <FaRegBookmark />
+                            <Button variant="trasparent" className="dropdown-item p-1">
+                              Salva
+                            </Button>
+                          </div>
+                          <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                            <FaLink />
+                            <Button variant="trasparent" className="dropdown-item p-1">
+                              Copia link al post
+                            </Button>
+                          </div>
+                          <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                            <FaFlag />
+                            <Button variant="trasparent" className="dropdown-item p-1">
+                              Segnala post
+                            </Button>
+                          </div>
+                          {p.user.username === profileDetails.username && (
+                            <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
+                              <FiEdit2 />
+                              <Button variant="secondary" className="dropdown-item rounded p-1" onClick={() => handleEditPost(p)}>
+                                Modifica
+                              </Button>
+                            </div>
+                          )}
+                          {p.user.username === profileDetails.username && (
+                            <div className=" d-flex align-items-center gap-1 text-danger home-hover-delete px-2 rounded">
+                              <MdDeleteForever />
+                              <Button
+                                variant="danger"
+                                className="dropdown-item text-danger home-hover-delete-btn rounded p-1"
+                                onClick={() => dispatch(deletePost(p._id))}
+                              >
+                                Elimina
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <p>
                     {expandedPosts.includes(p._id) ? p.text : p.text.slice(0, limit)}
@@ -134,7 +217,16 @@ const Posts = () => {
                       </span>
                     )}
                   </p>
-                  <span className=" small">at {p.createdAt.slice(0, 10)}</span>
+                  <span className="small d-flex align-items-center gap-2">
+                    {new Date(p.createdAt).toLocaleString("it-IT", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                    <FaEarthAmericas />
+                  </span>
                   <hr />
                   <section className="d-flex flex-row align-items-center justify-content-around">
                     <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
@@ -181,7 +273,12 @@ const Posts = () => {
                             }
                           }}
                           value={newComments[p._id] || ""}
-                          onChange={(e) => setNewComments({ ...newComments, [p._id]: e.target.value })}
+                          onChange={(e) =>
+                            setNewComments({
+                              ...newComments,
+                              [p._id]: e.target.value,
+                            })
+                          }
                           type="text"
                           placeholder="Aggiungi un commento..."
                           className="form-control rounded-pill"
@@ -235,6 +332,87 @@ const Posts = () => {
                         )}
                       </div>
                     </div>
+                  )}
+                  {editingPost && editingPost._id === p._id && (
+                    <Modal show={showModal} onHide={() => setShowModal(false)} centered className=" custom-modal modal-fullscreen modal-lg">
+                      <Modal.Body className=" d-flex flex-column p-4">
+                        <div className="d-flex align-items-center gap-3 mb-5">
+                          {profileDetails?.image && (
+                            <img
+                              src={profileDetails.image}
+                              alt="profile"
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                            />
+                          )}
+                          <div className=" d-flex flex-column">
+                            <span className="fw-semibold fs-5">
+                              {profileDetails?.name} {profileDetails?.surname}
+                            </span>
+                            <span className=" small">Pubblica: chiunque</span>
+                          </div>
+                          <div className=" ms-auto">
+                            <Button variant="light" className=" bg-transparent border-0 fs-4 p-0" onClick={() => setShowModal(false)}>
+                              <IoClose className=" d-flex align-self-center" />
+                            </Button>
+                          </div>
+                        </div>
+
+                        <Form.Control
+                          as="textarea"
+                          placeholder="Di cosa vorresti parlare?"
+                          className="form-control mb-2"
+                          value={updatedData.text}
+                          onChange={(e) =>
+                            setUpdatedData({
+                              ...updatedData,
+                              text: e.target.value,
+                            })
+                          }
+                          style={{
+                            border: "none",
+                            outline: "none",
+                            boxShadow: "none",
+                            fontSize: "1.1em",
+                            resize: "none",
+                          }}
+                        />
+                        <div className=" d-flex gap-2 mt-auto">
+                          <Button className=" bg-transparent text-secondary border-0 fs-5">
+                            <FaRegImage />
+                          </Button>
+                          <Button className=" bg-transparent text-secondary border-0 fs-5">
+                            <FaRegCalendarAlt />
+                          </Button>
+                          <Button className=" bg-transparent text-secondary border-0 fs-5">
+                            <BsFillChatSquareTextFill />
+                          </Button>
+                          <Button className=" bg-transparent text-secondary border-0 fs-5">
+                            <IoMdAdd />
+                          </Button>
+                        </div>
+                      </Modal.Body>
+
+                      <Modal.Footer>
+                        <Button className=" bg-transparent text-secondary border-0 fs-5">
+                          <MdOutlineWatchLater />
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            dispatch(editPost(editingPost._id, updatedData));
+                            setEditingPost(null);
+                            setShowModal(false);
+                          }}
+                          className=" bg-secondary border-0"
+                        >
+                          Salva
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   )}
                 </div>
               </Col>

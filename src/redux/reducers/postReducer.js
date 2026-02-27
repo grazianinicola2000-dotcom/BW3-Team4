@@ -5,6 +5,8 @@ import {
   CREATE_POST,
   CREATE_POST_ERROR,
   CREATE_POST_LOADING,
+  EDIT_POST,
+  DELETE_POST,
 } from "../actions/post"
 
 const initialState = {
@@ -33,6 +35,21 @@ const postReducer = (currentState = initialState, action) => {
         ...currentState,
         loading: false,
         postDetails: [action.payload, ...currentState.postDetails],
+      }
+    case EDIT_POST:
+      return {
+        ...currentState,
+        postDetails: currentState.postDetails.map((post) =>
+          post._id === action.payload._id ? action.payload : post,
+        ),
+      }
+    case DELETE_POST:
+      return {
+        ...currentState,
+        loading: false,
+        postDetails: currentState.postDetails.filter(
+          (p) => p._id !== action.payload,
+        ),
       }
     case GET_POST_ERROR:
     case CREATE_POST_ERROR:
