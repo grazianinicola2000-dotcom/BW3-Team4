@@ -218,6 +218,7 @@ const Posts = () => {
                       </span>
                     )}
                   </p>
+                  <img src={p.image} alt="image" className=" d-block mb-3" />
                   <span className="small d-flex align-items-center gap-2">
                     {new Date(p.createdAt).toLocaleString("it-IT", {
                       day: "2-digit",
@@ -230,13 +231,19 @@ const Posts = () => {
                   </span>
                   <hr />
                   <section className="d-flex flex-row align-items-center justify-content-around">
-                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
+                    <div
+                      className="home-hover rounded w-25 d-flex justify-content-center"
+                      style={{ cursor: "pointer" }}
+                    >
                       <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <AiOutlineLike className="fs-5" />
                         Consiglia
                       </Button>
                     </div>
-                    <div className="home-hover rounded w-25 d-flex justify-content-center " style={{ cursor: "pointer" }}>
+                    <div
+                      className="home-hover rounded w-25 d-flex justify-content-center "
+                      style={{ cursor: "pointer" }}
+                    >
                       <Button
                         onClick={() => toggleComments(p._id)}
                         className="d-flex flex-column align-items-center bg-transparent text-black border-0 rounded fw-semibold px-2"
@@ -245,13 +252,19 @@ const Posts = () => {
                         Commenta
                       </Button>
                     </div>
-                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
+                    <div
+                      className="home-hover rounded w-25 d-flex justify-content-center"
+                      style={{ cursor: "pointer" }}
+                    >
                       <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <BiRepost className="fs-5" />
                         Diffondi il post
                       </Button>
                     </div>
-                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
+                    <div
+                      className="home-hover rounded w-25 d-flex justify-content-center"
+                      style={{ cursor: "pointer" }}
+                    >
                       <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <RiShareForwardLine className="fs-5" />
                         Invia
