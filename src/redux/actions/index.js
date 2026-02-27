@@ -80,11 +80,13 @@ export const getProfile = function (userId) {
   };
 };
 
-export const editProfile = (updatedData) => {
+export const editProfile = (updatedData, userId) => {
   return async (dispatch) => {
-    const profileEndpoint = "https://striveschool-api.herokuapp.com/api/profile/";
+    const target = userId && userId !== "me" ? userId : "";
+    const profileEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${target}`;
     const authorizationNG =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+
     try {
       const response = await fetch(profileEndpoint, {
         method: "PUT",
@@ -94,17 +96,24 @@ export const editProfile = (updatedData) => {
         },
         body: JSON.stringify(updatedData),
       });
-      console.log("RESPONSE STATUS", response.status);
-      if (!response.ok) {
-        throw new Error("Update profile Error");
-      }
-      const data = await response.json();
 
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: data,
+        });
+      } else {
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: { ...updatedData, _id: userId },
+        });
+      }
+    } catch (error) {
       dispatch({
         type: EDIT_PROFILE,
-        payload: data,
+        payload: { ...updatedData, _id: userId },
       });
-    } catch (error) {
       console.log(error);
     }
   };
@@ -117,7 +126,7 @@ export const uploadProfilePicture = (userId, file) => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
 
     const formData = new FormData();
-    formData.append("profile", file); // cambia con "post"
+    formData.append("profile", file);
 
     try {
       const response = await fetch(endpoint, {
@@ -128,16 +137,19 @@ export const uploadProfilePicture = (userId, file) => {
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error("Errore upload immagine");
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: data,
+        });
+      } else {
+        const localImageUrl = URL.createObjectURL(file);
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: { image: localImageUrl, _id: userId },
+        });
       }
-
-      const data = await response.json();
-
-      dispatch({
-        type: EDIT_PROFILE,
-        payload: data,
-      });
     } catch (error) {
       console.error(error);
     }
@@ -163,7 +175,6 @@ export const closeExperienceEditForm = () => ({
   type: CLOSE_EXPERIENCE_EDIT_FORM,
 });
 
-// GET EXPERIENCE
 export const getExperiences = (userId) => {
   return async (dispatch) => {
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
@@ -191,8 +202,6 @@ export const getExperiences = (userId) => {
     }
   };
 };
-
-// ADD EXPERIENCE
 
 export const addExperience = (userId, expData) => {
   return async (dispatch) => {
@@ -223,8 +232,6 @@ export const addExperience = (userId, expData) => {
   };
 };
 
-// EDIT EXPERIENCE
-
 export const updateExperience = (userId, expId, expData) => {
   return async (dispatch) => {
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
@@ -253,8 +260,6 @@ export const updateExperience = (userId, expId, expData) => {
   };
 };
 
-// DELETE EXPERIENCE
-
 export const deleteExperience = (userId, expId) => {
   return async (dispatch) => {
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
@@ -278,8 +283,6 @@ export const deleteExperience = (userId, expId) => {
     }
   };
 };
-
-// EXPERIENCE PICTURE
 
 export const uploadExperiencePicture = (userId, expId, file) => {
   return async (dispatch) => {

@@ -30,28 +30,39 @@ const Jobs = () => {
     if (searched) {
       dispatch(getJobs(searched));
     }
-  }, [searched]);
+  }, [searched, dispatch]);
 
   return (
     <Container className="card shadow-none border-1 mb-2 custom-rounded mt-4">
       <div className="card-body p-3 p-md-4">
         <h2 className="fw-bold mb-0 h5 text-dark">Le migliori scelte di lavoro per te</h2>
         <p className="m-0 text-secondary mb-3">In base al tuo profilo, alle tue preferenze e alle tue attività, come candidature, ricerche e salvataggi</p>
-        <div className="d-flex flex-column  text-secondary mb-3 small">
-          {console.log(jobs)}
+        <div className="d-flex flex-column text-secondary mb-3 small">
           {jobs.map((job) => {
             return (
               <div className="jobCard d-flex py-3 border-bottom" key={job._id}>
                 <div className="m-2 me-3">
                   <img style={{ width: "60px" }} src="https://placehold.co/80x80?text=Logo" alt="company_logo" />
                 </div>
-                <div className="d-flex flex-column justify-content-between">
+                <div className="d-flex flex-column justify-content-between w-100">
                   <div>
                     <h5 className="text-primary m-0">
                       {job.category} - {job.title}
                     </h5>
                     <p className="text-secondary m-0">{job.company_name}</p>
-                    <p className="mt-1">{job.candidate_required_location}</p>
+                    <p className="mt-1 mb-1">{job.candidate_required_location}</p>
+                    
+                    <div
+                      className="text-muted mb-2"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: "2",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                      dangerouslySetInnerHTML={{ __html: job.description }}
+                    />
                   </div>
                   <p className="m-0">{formatDate(job.publication_date)}</p>
                 </div>
