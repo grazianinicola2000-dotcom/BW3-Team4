@@ -16,13 +16,12 @@ export const closeProfileEditForm = () => ({
 });
 
 export const getAllProfiles = () => {
-  const authorizationNG =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     try {
       const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
@@ -42,20 +41,18 @@ export const getAllProfiles = () => {
 };
 
 export const getProfile = function (userId) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch({ type: GET_PROFILE_LOADING });
+    const token = getState().auth.token;
 
     const isMe = !userId || userId === "me";
     const target = isMe ? "me" : userId;
     const profileEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${target}`;
 
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
-
     try {
       const response = await fetch(profileEndpoint, {
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
@@ -81,17 +78,16 @@ export const getProfile = function (userId) {
 };
 
 export const editProfile = (updatedData, userId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const target = userId && userId !== "me" ? userId : "";
     const profileEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${target}`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
 
     try {
       const response = await fetch(profileEndpoint, {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
@@ -120,10 +116,9 @@ export const editProfile = (updatedData, userId) => {
 };
 
 export const uploadProfilePicture = (userId, file) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
 
     const formData = new FormData();
     formData.append("profile", file);
@@ -132,7 +127,7 @@ export const uploadProfilePicture = (userId, file) => {
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -176,16 +171,16 @@ export const closeExperienceEditForm = () => ({
 });
 
 export const getExperiences = (userId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+
     dispatch({ type: GET_EXPERIENCES_LOADING });
 
     try {
       const response = await fetch(endpoint, {
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -204,15 +199,15 @@ export const getExperiences = (userId) => {
 };
 
 export const addExperience = (userId, expData) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(expData),
@@ -233,15 +228,15 @@ export const addExperience = (userId, expData) => {
 };
 
 export const updateExperience = (userId, expId, expData) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+
     try {
       const response = await fetch(endpoint, {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(expData),
@@ -261,15 +256,15 @@ export const updateExperience = (userId, expId, expData) => {
 };
 
 export const deleteExperience = (userId, expId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
+
     try {
       const response = await fetch(endpoint, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (!response.ok) throw new Error();
@@ -285,10 +280,9 @@ export const deleteExperience = (userId, expId) => {
 };
 
 export const uploadExperiencePicture = (userId, expId, file) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     const endpoint = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`;
-    const authorizationNG =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
 
     const formData = new FormData();
     formData.append("experience", file);
@@ -297,7 +291,7 @@ export const uploadExperiencePicture = (userId, expId, file) => {
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${authorizationNG}`,
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
@@ -382,5 +376,20 @@ export const getJobs = (query) => {
         type: GET_JOBS_ERROR,
       });
     }
+  };
+};
+
+// AUTH SECTION
+
+export const setActiveUser = (user) => {
+  return {
+    type: "SET_ACTIVE_USER",
+    payload: user,
+  };
+};
+
+export const logout = () => {
+  return {
+    type: "LOGOUT",
   };
 };

@@ -1,0 +1,4 @@
+.contact-info-data:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

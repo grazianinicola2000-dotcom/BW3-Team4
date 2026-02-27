@@ -20,13 +20,16 @@ import { FaFlag } from "react-icons/fa6";
 import { FiEdit2 } from "react-icons/fi";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEarthAmericas } from "react-icons/fa6";
-import { getAllProfiles } from "../redux/actions";
 
 const Posts = () => {
   const dispatch = useDispatch();
 
   const profileDetails = useSelector((currentState) => {
     return currentState.profile.profileDetails;
+  });
+
+  const activeUser = useSelector((currentState) => {
+    return currentState.auth.user;
   });
 
   const profiles = useSelector((currentState) => {
@@ -103,10 +106,6 @@ const Posts = () => {
     dispatch(getPost());
   }, []);
 
-  useEffect(() => {
-    dispatch(getAllProfiles());
-  }, []);
-
   console.log("ALL PROFILES:", profiles);
   return (
     <Container className=" mt-3 px-0">
@@ -176,7 +175,7 @@ const Posts = () => {
                               Segnala post
                             </Button>
                           </div>
-                          {p.user.username === profileDetails?.username && (
+                          {p.user.username === activeUser?.username && (
                             <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
                               <FiEdit2 />
                               <Button variant="secondary" className="dropdown-item rounded p-1" onClick={() => handleEditPost(p)}>
@@ -184,7 +183,7 @@ const Posts = () => {
                               </Button>
                             </div>
                           )}
-                          {p.user.username === profileDetails?.username && (
+                          {p.user.username === activeUser?.username && (
                             <div className=" d-flex align-items-center gap-1 text-danger home-hover-delete px-2 rounded">
                               <MdDeleteForever />
                               <Button
@@ -231,19 +230,13 @@ const Posts = () => {
                   </span>
                   <hr />
                   <section className="d-flex flex-row align-items-center justify-content-around">
-                    <div
-                      className="home-hover rounded w-25 d-flex justify-content-center"
-                      style={{ cursor: "pointer" }}
-                    >
+                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
                       <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <AiOutlineLike className="fs-5" />
                         Consiglia
                       </Button>
                     </div>
-                    <div
-                      className="home-hover rounded w-25 d-flex justify-content-center "
-                      style={{ cursor: "pointer" }}
-                    >
+                    <div className="home-hover rounded w-25 d-flex justify-content-center " style={{ cursor: "pointer" }}>
                       <Button
                         onClick={() => toggleComments(p._id)}
                         className="d-flex flex-column align-items-center bg-transparent text-black border-0 rounded fw-semibold px-2"
@@ -252,19 +245,13 @@ const Posts = () => {
                         Commenta
                       </Button>
                     </div>
-                    <div
-                      className="home-hover rounded w-25 d-flex justify-content-center"
-                      style={{ cursor: "pointer" }}
-                    >
+                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
                       <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <BiRepost className="fs-5" />
                         Diffondi il post
                       </Button>
                     </div>
-                    <div
-                      className="home-hover rounded w-25 d-flex justify-content-center"
-                      style={{ cursor: "pointer" }}
-                    >
+                    <div className="home-hover rounded w-25 d-flex justify-content-center" style={{ cursor: "pointer" }}>
                       <Button className="bg-transparent d-flex flex-column align-items-center bg-white text-black border-0 rounded fw-semibold px-2">
                         <RiShareForwardLine className="fs-5" />
                         Invia
@@ -365,7 +352,7 @@ const Posts = () => {
                                         Segnala post
                                       </Button>
                                     </div>
-                                    {c.author === profileDetails?.username && (
+                                    {c.author === activeUser?.username && (
                                       <div className=" d-flex align-items-center gap-1 text-danger home-hover-delete px-2 rounded">
                                         <MdDeleteForever />
                                         <Button
