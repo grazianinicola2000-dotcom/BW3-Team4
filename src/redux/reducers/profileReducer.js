@@ -36,14 +36,11 @@ const profileReducer = (currentState = initialState, action) => {
     case EDIT_PROFILE:
       return {
         ...currentState,
-        profileDetails: {
-          ...currentState.profileDetails,
-          ...action.payload,
-        },
-        myProfile: {
-          ...currentState.myProfile,
-          ...action.payload,
-        }
+        profileDetails: action.payload,
+        myProfile: currentState.myProfile?._id === action.payload._id 
+          ? action.payload 
+          : currentState.myProfile,
+        loading: false,
       };
     default:
       return currentState;

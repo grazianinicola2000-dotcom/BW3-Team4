@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProfile } from "../redux/actions";
-import { BsInfoSquareFill, BsChevronDown } from "react-icons/bs";
 import "./AsideSharedProfile.css";
 
 const AsideJobProfile = () => {
