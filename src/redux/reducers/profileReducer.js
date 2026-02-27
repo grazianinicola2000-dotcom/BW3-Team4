@@ -1,8 +1,9 @@
-import { GET_PROFILE, GET_MY_PROFILE, GET_PROFILE_ERROR, GET_PROFILE_LOADING, EDIT_PROFILE } from "../actions";
+import { GET_MY_PROFILE, GET_PROFILE_ERROR, GET_PROFILE_LOADING, EDIT_PROFILE, GET_ALL_PROFILES } from "../actions";
 
 const initialState = {
   profileDetails: null,
-  myProfile: null,      
+  myProfile: null,
+  profiles: {},
   error: false,
   loading: false,
 };
@@ -15,12 +16,24 @@ const profileReducer = (currentState = initialState, action) => {
         loading: true,
         error: false,
       };
-    case GET_PROFILE:
+    case GET_ALL_PROFILES: {
+      const profilesMap = {};
+
+      action.payload.forEach((profile) => {
+        if (profile.username) {
+          profilesMap[profile.username] = profile;
+        }
+
+        if (profile.email) {
+          profilesMap[profile.email] = profile;
+        }
+      });
+
       return {
         ...currentState,
-        profileDetails: action.payload,
-        loading: false,
+        profiles: profilesMap,
       };
+    }
     case GET_MY_PROFILE:
       return {
         ...currentState,
@@ -43,7 +56,7 @@ const profileReducer = (currentState = initialState, action) => {
         myProfile: {
           ...currentState.myProfile,
           ...action.payload,
-        }
+        },
       };
     default:
       return currentState;

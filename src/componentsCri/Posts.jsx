@@ -7,12 +7,17 @@ import { AiOutlineLike } from "react-icons/ai";
 import { FaRegCommentDots } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { RiShareForwardLine } from "react-icons/ri";
+import { getAllProfiles } from "../redux/actions";
 
 const Posts = () => {
   const dispatch = useDispatch();
 
   const profileDetails = useSelector((currentState) => {
     return currentState.profile.profileDetails;
+  });
+
+  const profiles = useSelector((currentState) => {
+    return currentState.profile.profiles;
   });
 
   const formatDate = (date) => {
@@ -70,6 +75,11 @@ const Posts = () => {
     dispatch(getPost());
   }, []);
 
+  useEffect(() => {
+    dispatch(getAllProfiles());
+  }, []);
+
+  console.log("ALL PROFILES:", profiles);
   return (
     <Container className=" mt-3 px-0">
       <Row className="justify-content-center">
@@ -158,7 +168,7 @@ const Posts = () => {
                   {showCommentsPosts.includes(p._id) && (
                     <div className="comments-panel mt-3">
                       <div className="d-flex gap-2 align-items-center mb-4">
-                        <img src={profileDetails.image} className="rounded-circle" width="30" />
+                        <img src={profileDetails?.image} className="rounded-circle" width="30" />
                         <input
                           onKeyDown={(e) => {
                             if (e.key === "Enter" && newComments[p._id]?.trim()) {
@@ -182,28 +192,44 @@ const Posts = () => {
                         {commentsLoading && <Spinner size="sm" />}
 
                         {comments[p._id]?.length > 0 ? (
-                          comments[p._id].map((c) => (
-                            <div className="mb-4" key={c._id}>
-                              <div className="d-flex justify-content-between align-items-baseline">
-                                <h5 className="m-0">
-                                  {c.author}
-                                  {console.log(c)}
-                                </h5>
-                                <div className="d-flex align-items-center gap-3">
-                                  <p className="text-secondary m-0" style={{ fontSize: "10px" }}>
-                                    {formatDate(c.updatedAt)}
-                                  </p>
-                                  <i class="bi bi-three-dots"></i>
+                          comments[p._id].map((c) => {
+                            console.log("AUTHOR:", c.author);
+                            console.log("PROFILE FROM MAP:", profiles[c.author]);
+                            return (
+                              <div className="mb-4" key={c._id}>
+                                <div className="d-flex justify-content-between align-items-center m-0">
+                                  <div className="d-flex gap-2">
+                                    {profiles[c.author]?.image ? (
+                                      <img src={profiles[c.author].image} width="30" height="30" className="rounded-circle" />
+                                    ) : (
+                                      <div
+                                        style={{
+                                          width: "30px",
+                                          height: "30px",
+                                          borderRadius: "50%",
+                                          backgroundColor: "#ccc",
+                                        }}
+                                      />
+                                    )}
+
+                                    <h5 className="m-0">{c.author}</h5>
+                                  </div>
+                                  <div className="d-flex align-items-center gap-3">
+                                    <p className="text-secondary m-0" style={{ fontSize: "10px" }}>
+                                      {formatDate(c.updatedAt)}
+                                    </p>
+                                    <i className="bi bi-three-dots"></i>
+                                  </div>
                                 </div>
+                                <p className="m-0 ps-5 pt-0">{c.comment}</p>
+                                {c.author === profileDetails?.username && (
+                                  <p style={{ fontSize: "10px" }} onClick={() => dispatch(deleteComment(c._id, p._id))}>
+                                    Elimina
+                                  </p>
+                                )}
                               </div>
-                              <p className="m-0 ps-3">{c.comment}</p>
-                              {c.author === profileDetails.username && (
-                                <p style={{ fontSize: "10px" }} onClick={() => dispatch(deleteComment(c._id, p._id))}>
-                                  Elimina
-                                </p>
-                              )}
-                            </div>
-                          ))
+                            );
+                          })
                         ) : (
                           <div>Nessun commento disponibile</div>
                         )}
@@ -214,8 +240,6 @@ const Posts = () => {
               </Col>
             ))}
       </Row>
-      {console.log(comments)}
-      {console.log(post)}
     </Container>
   );
 };
