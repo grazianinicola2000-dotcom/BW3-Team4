@@ -147,7 +147,7 @@ const Posts = () => {
                       <Button className=" text-primary bg-white border-0 p-0 fw-semibold">+ segui</Button>{" "}
                       <Button onClick={() => setOpenMenuId(openMenuId === p._id ? null : p._id)} className=" text-secondary bg-white border-0 p-0 fw-semibold">
                         <SlOptions />
-                      </Button>{" "}
+                      </Button>
                       {openMenuId === p._id && (
                         <div
                           className="position-absolute bg-white shadow rounded p-2 d-flex flex-column gap-2"
@@ -175,7 +175,7 @@ const Posts = () => {
                               Segnala post
                             </Button>
                           </div>
-                          {p.user.username === profileDetails.username && (
+                          {p.user.username === profileDetails?.username && (
                             <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
                               <FiEdit2 />
                               <Button variant="secondary" className="dropdown-item rounded p-1" onClick={() => handleEditPost(p)}>
@@ -183,7 +183,7 @@ const Posts = () => {
                               </Button>
                             </div>
                           )}
-                          {p.user.username === profileDetails.username && (
+                          {p.user.username === profileDetails?.username && (
                             <div className=" d-flex align-items-center gap-1 text-danger home-hover-delete px-2 rounded">
                               <MdDeleteForever />
                               <Button
@@ -315,7 +315,12 @@ const Posts = () => {
                                     <p className="text-secondary m-0" style={{ fontSize: "10px" }}>
                                       {formatDate(c.updatedAt)}
                                     </p>
-                                    <i className="bi bi-three-dots"></i>
+                                    <Button
+                                      onClick={() => setOpenMenuId(openMenuId === p._id ? null : p._id)}
+                                      className=" text-secondary bg-white border-0 p-0 fw-semibold"
+                                    >
+                                      <SlOptions />
+                                    </Button>
                                   </div>
                                 </div>
                                 <p className="m-0 ps-5 pt-0">{c.comment}</p>
