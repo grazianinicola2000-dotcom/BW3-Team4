@@ -47,7 +47,7 @@ export const getProfile = function (userId) {
 
     const isMe = !userId || userId === "me";
     const target = isMe ? "me" : userId;
-    const profileEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${encodeURIComponent(target)}`;
+    const profileEndpoint = `https://striveschool-api.herokuapp.com/api/profile/${target}`;
 
     const authorizationNG =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTljMTZkYTBiYzFkZTAwMTU3N2I3OWUiLCJpYXQiOjE3NzE4MzcxNTQsImV4cCI6MTc3MzA0Njc1NH0.8jsfM_MKpnxGw2osaDB_U2x4UZk7GfBUrJ1dx99sdGM";
