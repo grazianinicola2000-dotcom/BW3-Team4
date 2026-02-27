@@ -1,40 +1,56 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPost, getComments, addComment, deleteComment, editPost, deletePost } from "../redux/actions/post";
-import { Alert, Button, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
-import { useState } from "react";
-import { AiOutlineLike } from "react-icons/ai";
-import { FaRegCommentDots } from "react-icons/fa";
-import { BiRepost } from "react-icons/bi";
-import { RiShareForwardLine } from "react-icons/ri";
-import { SlOptions } from "react-icons/sl";
-import { IoClose } from "react-icons/io5";
-import { FaRegImage } from "react-icons/fa6";
-import { FaRegCalendarAlt } from "react-icons/fa";
-import { BsFillChatSquareTextFill } from "react-icons/bs";
-import { IoMdAdd } from "react-icons/io";
-import { MdOutlineWatchLater } from "react-icons/md";
-import { FaRegBookmark } from "react-icons/fa6";
-import { FaLink } from "react-icons/fa6";
-import { FaFlag } from "react-icons/fa6";
-import { FiEdit2 } from "react-icons/fi";
-import { MdDeleteForever } from "react-icons/md";
-import { FaEarthAmericas } from "react-icons/fa6";
-import { getAllProfiles } from "../redux/actions";
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  getPost,
+  getComments,
+  addComment,
+  deleteComment,
+  editPost,
+  deletePost,
+} from "../redux/actions/post"
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+  Spinner,
+} from "react-bootstrap"
+import { useState } from "react"
+import { AiOutlineLike } from "react-icons/ai"
+import { FaRegCommentDots } from "react-icons/fa"
+import { BiRepost } from "react-icons/bi"
+import { RiShareForwardLine } from "react-icons/ri"
+import { SlOptions } from "react-icons/sl"
+import { IoClose } from "react-icons/io5"
+import { FaRegImage } from "react-icons/fa6"
+import { FaRegCalendarAlt } from "react-icons/fa"
+import { BsFillChatSquareTextFill } from "react-icons/bs"
+import { IoMdAdd } from "react-icons/io"
+import { MdOutlineWatchLater } from "react-icons/md"
+import { FaRegBookmark } from "react-icons/fa6"
+import { FaLink } from "react-icons/fa6"
+import { FaFlag } from "react-icons/fa6"
+import { FiEdit2 } from "react-icons/fi"
+import { MdDeleteForever } from "react-icons/md"
+import { FaEarthAmericas } from "react-icons/fa6"
+import { getAllProfiles } from "../redux/actions"
 
 const Posts = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const profileDetails = useSelector((currentState) => {
-    return currentState.profile.profileDetails;
-  });
+    return currentState.profile.profileDetails
+  })
 
   const profiles = useSelector((currentState) => {
-    return currentState.profile.profiles;
-  });
+    return currentState.profile.profiles
+  })
 
   const formatDate = (date) => {
-    if (!date) return "";
+    if (!date) return ""
 
     const formatted = new Date(date).toLocaleDateString("it-IT", {
       hour: "numeric",
@@ -42,71 +58,81 @@ const Posts = () => {
       day: "numeric",
       month: "short",
       year: "numeric",
-    });
+    })
 
-    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
-  };
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1)
+  }
   // POST
 
   const post = useSelector((currentState) => {
-    return currentState.post.postDetails;
-  });
+    return currentState.post.postDetails
+  })
 
   const loading = useSelector((currentState) => {
-    return currentState.post.loading;
-  });
+    return currentState.post.loading
+  })
 
   const error = useSelector((currentState) => {
-    return currentState.post.error;
-  });
+    return currentState.post.error
+  })
 
   // COMMENTI
 
-  const comments = useSelector((currentState) => currentState.comments.comments);
-  const commentsLoading = useSelector((currentState) => currentState.comments.loading);
-  const [showCommentsPosts, setShowCommentsPosts] = useState([]);
-  const [newComments, setNewComments] = useState({});
+  const comments = useSelector((currentState) => currentState.comments.comments)
+  const commentsLoading = useSelector(
+    (currentState) => currentState.comments.loading,
+  )
+  const [showCommentsPosts, setShowCommentsPosts] = useState([])
+  const [newComments, setNewComments] = useState({})
 
   const toggleComments = (postId) => {
     if (!comments[postId]) {
-      dispatch(getComments(postId));
+      dispatch(getComments(postId))
     }
 
-    setShowCommentsPosts((prev) => (prev.includes(postId) ? prev.filter((id) => id !== postId) : [...prev, postId]));
-  };
+    setShowCommentsPosts((prev) =>
+      prev.includes(postId)
+        ? prev.filter((id) => id !== postId)
+        : [...prev, postId],
+    )
+  }
 
   // TEXT
 
-  const [expandedPosts, setExpandedPosts] = useState([]);
-  const limit = 200;
+  const [expandedPosts, setExpandedPosts] = useState([])
+  const limit = 200
 
   const togglePost = (id) => {
-    setExpandedPosts((prev) => (prev.includes(id) ? prev.filter((postId) => postId !== id) : [...prev, id]));
-  };
+    setExpandedPosts((prev) =>
+      prev.includes(id)
+        ? prev.filter((postId) => postId !== id)
+        : [...prev, id],
+    )
+  }
 
-  const [openMenuId, setOpenMenuId] = useState(null);
+  const [openMenuId, setOpenMenuId] = useState(null)
 
-  const [editingPost, setEditingPost] = useState(null);
-  const [updatedData, setUpdatedData] = useState({ text: "" });
+  const [editingPost, setEditingPost] = useState(null)
+  const [updatedData, setUpdatedData] = useState({ text: "" })
 
   const handleEditPost = (post) => {
-    setEditingPost(post);
-    setUpdatedData({ text: post.text || "" });
-    setOpenMenuId(null);
-    setShowModal(true);
-  };
+    setEditingPost(post)
+    setUpdatedData({ text: post.text || "" })
+    setOpenMenuId(null)
+    setShowModal(true)
+  }
 
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    dispatch(getPost());
-  }, []);
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    dispatch(getAllProfiles());
-  }, []);
+    dispatch(getPost())
+  }, [])
 
-  console.log("ALL PROFILES:", profiles);
+  useEffect(() => {
+    dispatch(getAllProfiles())
+  }, [])
+
+  console.log("ALL PROFILES:", profiles)
   return (
     <Container className=" mt-3 px-0">
       <Row className="justify-content-center">
@@ -144,8 +170,15 @@ const Posts = () => {
                       <h5 className=" m-0">{p.user.username || "Unknown"}</h5>
                     </div>
                     <div className=" d-flex gap-3 position-relative">
-                      <Button className=" text-primary bg-white border-0 p-0 fw-semibold">+ segui</Button>{" "}
-                      <Button onClick={() => setOpenMenuId(openMenuId === p._id ? null : p._id)} className=" text-secondary bg-white border-0 p-0 fw-semibold">
+                      <Button className=" text-primary bg-white border-0 p-0 fw-semibold">
+                        + segui
+                      </Button>{" "}
+                      <Button
+                        onClick={() =>
+                          setOpenMenuId(openMenuId === p._id ? null : p._id)
+                        }
+                        className=" text-secondary bg-white border-0 p-0 fw-semibold"
+                      >
                         <SlOptions />
                       </Button>
                       {openMenuId === p._id && (
@@ -159,26 +192,39 @@ const Posts = () => {
                         >
                           <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
                             <FaRegBookmark />
-                            <Button variant="trasparent" className="dropdown-item p-1">
+                            <Button
+                              variant="trasparent"
+                              className="dropdown-item p-1"
+                            >
                               Salva
                             </Button>
                           </div>
                           <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
                             <FaLink />
-                            <Button variant="trasparent" className="dropdown-item p-1">
+                            <Button
+                              variant="trasparent"
+                              className="dropdown-item p-1"
+                            >
                               Copia link al post
                             </Button>
                           </div>
                           <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
                             <FaFlag />
-                            <Button variant="trasparent" className="dropdown-item p-1">
+                            <Button
+                              variant="trasparent"
+                              className="dropdown-item p-1"
+                            >
                               Segnala post
                             </Button>
                           </div>
                           {p.user.username === profileDetails?.username && (
                             <div className=" d-flex align-items-center gap-1 home-hover px-2 rounded">
                               <FiEdit2 />
-                              <Button variant="secondary" className="dropdown-item rounded p-1" onClick={() => handleEditPost(p)}>
+                              <Button
+                                variant="secondary"
+                                className="dropdown-item rounded p-1"
+                                onClick={() => handleEditPost(p)}
+                              >
                                 Modifica
                               </Button>
                             </div>
@@ -200,9 +246,13 @@ const Posts = () => {
                     </div>
                   </div>
                   <p>
-                    {expandedPosts.includes(p._id) ? p.text : p.text.slice(0, limit)}
+                    {expandedPosts.includes(p._id)
+                      ? p.text
+                      : p.text.slice(0, limit)}
 
-                    {p.text.length > limit && !expandedPosts.includes(p._id) && "... "}
+                    {p.text.length > limit &&
+                      !expandedPosts.includes(p._id) &&
+                      "... "}
 
                     {p.text.length > limit && (
                       <span
@@ -213,11 +263,15 @@ const Posts = () => {
                           marginLeft: "5px",
                         }}
                       >
-                        {expandedPosts.includes(p._id) ? "Mostra meno" : "Leggi di più"}
+                        {expandedPosts.includes(p._id)
+                          ? "Mostra meno"
+                          : "Leggi di più"}
                       </span>
                     )}
                   </p>
-                  <img src={p.image} alt="image" className=" d-block mb-3" />
+                  {p.image && (
+                    <img src={p.image} alt="image" className=" d-block mb-3" />
+                  )}
                   <span className="small d-flex align-items-center gap-2">
                     {new Date(p.createdAt).toLocaleString("it-IT", {
                       day: "2-digit",
@@ -273,16 +327,23 @@ const Posts = () => {
                   {showCommentsPosts.includes(p._id) && (
                     <div className="comments-panel mt-3">
                       <div className="d-flex gap-2 align-items-center mb-4">
-                        <img src={profileDetails?.image} className="rounded-circle" width="30" />
+                        <img
+                          src={profileDetails?.image}
+                          className="rounded-circle"
+                          width="30"
+                        />
                         <input
                           onKeyDown={(e) => {
-                            if (e.key === "Enter" && newComments[p._id]?.trim()) {
-                              e.preventDefault();
-                              dispatch(addComment(p._id, newComments[p._id]));
+                            if (
+                              e.key === "Enter" &&
+                              newComments[p._id]?.trim()
+                            ) {
+                              e.preventDefault()
+                              dispatch(addComment(p._id, newComments[p._id]))
                               setNewComments({
                                 ...newComments,
                                 [p._id]: "",
-                              });
+                              })
                             }
                           }}
                           value={newComments[p._id] || ""}
@@ -303,14 +364,19 @@ const Posts = () => {
 
                         {comments[p._id]?.length > 0 ? (
                           comments[p._id].map((c) => {
-                            console.log("AUTHOR:", c.author);
-                            console.log("PROFILE FROM MAP:", profiles[c.author]);
+                            console.log("AUTHOR:", c.author)
+                            console.log("PROFILE FROM MAP:", profiles[c.author])
                             return (
                               <div className="mb-4" key={c._id}>
                                 <div className="d-flex justify-content-between align-items-center m-0">
                                   <div className="d-flex gap-2">
                                     {profiles[c.author]?.image ? (
-                                      <img src={profiles[c.author].image} width="30" height="30" className="rounded-circle" />
+                                      <img
+                                        src={profiles[c.author].image}
+                                        width="30"
+                                        height="30"
+                                        className="rounded-circle"
+                                      />
                                     ) : (
                                       <div
                                         style={{
@@ -325,11 +391,18 @@ const Posts = () => {
                                     <h5 className="m-0">{c.author}</h5>
                                   </div>
                                   <div className="d-flex align-items-center gap-3">
-                                    <p className="text-secondary m-0" style={{ fontSize: "10px" }}>
+                                    <p
+                                      className="text-secondary m-0"
+                                      style={{ fontSize: "10px" }}
+                                    >
                                       {formatDate(c.updatedAt)}
                                     </p>
                                     <Button
-                                      onClick={() => setOpenMenuId(openMenuId === p._id ? null : p._id)}
+                                      onClick={() =>
+                                        setOpenMenuId(
+                                          openMenuId === p._id ? null : p._id,
+                                        )
+                                      }
                                       className=" text-secondary bg-white border-0 p-0 fw-semibold"
                                     >
                                       <SlOptions />
@@ -338,12 +411,17 @@ const Posts = () => {
                                 </div>
                                 <p className="m-0 ps-5 pt-0">{c.comment}</p>
                                 {c.author === profileDetails?.username && (
-                                  <p style={{ fontSize: "10px" }} onClick={() => dispatch(deleteComment(c._id, p._id))}>
+                                  <p
+                                    style={{ fontSize: "10px" }}
+                                    onClick={() =>
+                                      dispatch(deleteComment(c._id, p._id))
+                                    }
+                                  >
                                     Elimina
                                   </p>
                                 )}
                               </div>
-                            );
+                            )
                           })
                         ) : (
                           <div>Nessun commento disponibile</div>
@@ -352,7 +430,12 @@ const Posts = () => {
                     </div>
                   )}
                   {editingPost && editingPost._id === p._id && (
-                    <Modal show={showModal} onHide={() => setShowModal(false)} centered className=" custom-modal modal-fullscreen modal-lg">
+                    <Modal
+                      show={showModal}
+                      onHide={() => setShowModal(false)}
+                      centered
+                      className=" custom-modal modal-fullscreen modal-lg"
+                    >
                       <Modal.Body className=" d-flex flex-column p-4">
                         <div className="d-flex align-items-center gap-3 mb-5">
                           {profileDetails?.image && (
@@ -374,7 +457,11 @@ const Posts = () => {
                             <span className=" small">Pubblica: chiunque</span>
                           </div>
                           <div className=" ms-auto">
-                            <Button variant="light" className=" bg-transparent border-0 fs-4 p-0" onClick={() => setShowModal(false)}>
+                            <Button
+                              variant="light"
+                              className=" bg-transparent border-0 fs-4 p-0"
+                              onClick={() => setShowModal(false)}
+                            >
                               <IoClose className=" d-flex align-self-center" />
                             </Button>
                           </div>
@@ -421,9 +508,9 @@ const Posts = () => {
                         </Button>
                         <Button
                           onClick={() => {
-                            dispatch(editPost(editingPost._id, updatedData));
-                            setEditingPost(null);
-                            setShowModal(false);
+                            dispatch(editPost(editingPost._id, updatedData))
+                            setEditingPost(null)
+                            setShowModal(false)
                           }}
                           className=" bg-secondary border-0"
                         >
@@ -437,7 +524,7 @@ const Posts = () => {
             ))}
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts
