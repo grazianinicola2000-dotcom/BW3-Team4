@@ -16,8 +16,7 @@ export const closeProfileEditForm = () => ({
 });
 
 export const getAllProfiles = () => {
-  return async (dispatch, getState) => {
-    const token = getState().auth.token;
+  return async (dispatch) => {
     try {
       const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
         headers: {
